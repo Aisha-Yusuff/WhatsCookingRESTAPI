@@ -47,7 +47,7 @@ public class RecipeControllerTest {
         Ingredient sugar = new Ingredient(3L, "Sugar", "1 Teaspoon");
 
 //        create set to hold all ingredients for recipe
-        Set<Ingredient> ingredientsSet = new HashSet<Ingredient>(Arrays.asList(porridgeOats, milk, sugar));
+        Set<Ingredient> ingredientsSet = new HashSet<>(Arrays.asList(porridgeOats, milk, sugar));
 
         Recipe porridgeRecipe = Recipe.builder()
                 .name("Quick and easy Porridge")
