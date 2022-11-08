@@ -14,7 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.BDDMockito.given;
@@ -47,7 +49,7 @@ public class RecipeControllerTest {
 //        create set to hold all ingredients for recipe
         Set<Ingredient> ingredientsSet = new HashSet<Ingredient>(Arrays.asList(porridgeOats, milk, sugar));
 
-        Recipe porridgeRecipe = Porridge.builder()
+        Recipe porridgeRecipe = Recipe.builder()
                 .name("Quick and easy Porridge")
                 .instructions("1.Put your porridge oats in a saucepan \n" +
                         "2.Pour the milk into the saucepan \n" +
