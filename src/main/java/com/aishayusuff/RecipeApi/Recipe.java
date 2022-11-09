@@ -25,6 +25,7 @@ public class Recipe {
 
     //   One to many unidirectional mapping
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name ="recipe_id", referencedColumnName = "id")
     private Set<Ingredient> ingredients = new HashSet<>();
 
     public Recipe(String name, String instructions, Set<Ingredient> ingredients) {

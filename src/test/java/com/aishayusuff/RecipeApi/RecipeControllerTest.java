@@ -42,14 +42,8 @@ public class RecipeControllerTest {
 
     @Test
     void shouldReturnListOfAllRecipes() throws Exception {
-//        given - create a recipe list, with a recipe object and ingredient objects
-        Ingredient porridgeOats = new Ingredient(1L,"Porridge Oats", "50g");
-        Ingredient milk = new Ingredient(2L,"Milk", "350ml");
-        Ingredient sugar = new Ingredient(3L, "Sugar", "1 Teaspoon");
-
-//        create set to hold all ingredients for recipe
-        Set<Ingredient> ingredientsSet = new HashSet<>(Arrays.asList(porridgeOats, milk, sugar));
-
+//        given
+//        build a recipe (without ingredients)
         Recipe porridgeRecipe = Recipe.builder()
                 .name("Quick and easy Porridge")
                 .instructions("""
@@ -57,9 +51,18 @@ public class RecipeControllerTest {
                         2.Pour the milk into the saucepan.\s
                         3.Sprinkle a teaspoon of sugar in to the saucepan.\s
                         4. Cook on medium to low heat for 4-5 minutes and then serve and enjoy""")
-                .ingredients(ingredientsSet)
                 .build();
 
+//        create ingredients for the recipe
+        Ingredient porridgeOats = new Ingredient("Porridge Oats", "50g", porridgeRecipe.getId());
+        Ingredient milk = new Ingredient("Milk", "350ml", porridgeRecipe.getId());
+        Ingredient sugar = new Ingredient( "Sugar", "1 Teaspoon", porridgeRecipe.getId());
+//        create set to hold all ingredients for recipe
+        Set<Ingredient> ingredientsSet = new HashSet<>(Arrays.asList(porridgeOats, milk, sugar));
+//      Add ingredients to recipe
+        porridgeRecipe.setIngredients(ingredientsSet);
+
+//      Add recipe to Recipe list
         List<Recipe> recipeList = List.of(porridgeRecipe);
         given(recipeService.getAllRecipes()).willReturn(recipeList);
 
