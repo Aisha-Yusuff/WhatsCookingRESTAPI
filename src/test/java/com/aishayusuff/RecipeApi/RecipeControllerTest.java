@@ -3,6 +3,7 @@ package com.aishayusuff.RecipeApi;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -12,7 +13,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ExtendWith(SpringExtension.class)
 //MVC controller
 @WebMvcTest(RecipeController.class)
+@AutoConfigureJsonTesters
 public class RecipeControllerTest {
 //    Mock service layer
     @Autowired
@@ -51,10 +52,11 @@ public class RecipeControllerTest {
 
         Recipe porridgeRecipe = Recipe.builder()
                 .name("Quick and easy Porridge")
-                .instructions("1.Put your porridge oats in a saucepan \n" +
-                        "2.Pour the milk into the saucepan \n" +
-                        "3.Sprinkle a teaspoon of sugar in to the saucepan.\n" +
-                        "4. Cook on medium to low heat for 4-5 minutes and then serve and enjoy")
+                .instructions("""
+                        1.Put your porridge oats in a saucepan.\s
+                        2.Pour the milk into the saucepan.\s
+                        3.Sprinkle a teaspoon of sugar in to the saucepan.\s
+                        4. Cook on medium to low heat for 4-5 minutes and then serve and enjoy""")
                 .ingredients(ingredientsSet)
                 .build();
 
@@ -62,17 +64,16 @@ public class RecipeControllerTest {
         given(recipeService.getAllRecipes()).willReturn(recipeList);
 
 //        when
-        MockHttpServletResponse response = mockMvc.perform(get("/api/recipes")
+        MockHttpServletResponse response = mockMvc.perform(get("/recipe")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
 //        then
         then(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        then(response.getContentAsString()).isEqualTo(json.write(recipeList));
+        then(response.getContentAsString()).isEqualTo(json.write(recipeList).getJson());
         verify(recipeService).getAllRecipes();
 
     }
-
 
 
 
