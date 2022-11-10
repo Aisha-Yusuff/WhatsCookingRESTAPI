@@ -3,7 +3,6 @@ package com.aishayusuff.RecipeApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,7 +13,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getAllRecipes() {
+
         return (List<Recipe>) recipeRepository.findAll();
+    }
+
+    @Override
+    public Recipe addNewRecipe(Recipe recipe, Ingredient ingredient) {
+        ingredientRepository.save(ingredient);
+        return recipeRepository.save(recipe);
     }
 
 }

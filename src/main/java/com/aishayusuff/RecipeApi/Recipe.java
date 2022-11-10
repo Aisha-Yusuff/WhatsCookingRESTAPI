@@ -34,3 +34,8 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 }
+
+/*
+INSERT INTO recipes (name)
+VALUES ("Hard Boiled Eggs");
+ */

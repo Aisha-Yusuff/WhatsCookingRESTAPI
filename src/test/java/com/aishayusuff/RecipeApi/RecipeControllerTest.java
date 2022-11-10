@@ -41,6 +41,7 @@ public class RecipeControllerTest {
 // JSON tester - to convert recipe list to json to compare against req body
     @Autowired
     private JacksonTester<List<Recipe>> json;
+    @Autowired
     private JacksonTester<Recipe> jsonRequest;
 
     @Test
@@ -86,11 +87,11 @@ public class RecipeControllerTest {
 //        given
 //        build a new recipe to add to recipe list
         Recipe vegSoup = Recipe.builder().name("Veggie Soup for One")
-                .instructions(""" 
-                1.Pour the water in a medium-sized pot. 
-                2.Add your stock cubes and seasonings. 
-                3.Chop your veggies and place them in your pot. 
-                4.Leave your soup to cook for 20 minutes on a medium heat. 
+                .instructions("""
+                1.Pour the water in a medium-sized pot.\s
+                2.Add your stock cubes and seasonings.\s
+                3.Chop your veggies and place them in your pot.\s
+                4.Leave your soup to cook for 20 minutes on a medium heat.\s
                 5. If you like your veggies soft let them cook for another 10 minutes and then serve your soup.
                 """)
                 .build();
@@ -107,7 +108,7 @@ public class RecipeControllerTest {
         Set<Ingredient> soupIngredientSet = new HashSet<>(Arrays.asList
                 (water, carrot, celery, potato, stockCubes, salt, blackPepper, paprika));
         vegSoup.setIngredients(soupIngredientSet);
-        given(recipeService).addNewRecipe(any(Recipe.class)).willReturn(vegSoup);
+        given(recipeService.addNewRecipe(any(Recipe.class), any(Ingredient.class))).willReturn(vegSoup);
 //        when - post request to add new recipe
         MockHttpServletResponse response = mockMvc.perform(post("/recipe")
                 .contentType(MediaType.APPLICATION_JSON)
