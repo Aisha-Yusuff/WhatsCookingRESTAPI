@@ -108,7 +108,10 @@ public class RecipeControllerTest {
         Set<Ingredient> soupIngredientSet = new HashSet<>(Arrays.asList
                 (water, carrot, celery, potato, stockCubes, salt, blackPepper, paprika));
         vegSoup.setIngredients(soupIngredientSet);
-        given(recipeService.addNewRecipe(any(Recipe.class), any(Ingredient.class))).willReturn(vegSoup);
+
+        //        given(recipeService.addNewRecipe(any(Recipe.class), eq(soupIngredientSet))).willReturn(vegSoup);
+        given(recipeService.addNewRecipe(any(Recipe.class))).willReturn(vegSoup);
+
 //        when - post request to add new recipe
         MockHttpServletResponse response = mockMvc.perform(post("/recipe")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -22,8 +22,6 @@ public class Ingredient {
     private Long recipe_id;
 
     public Ingredient( String name, String quantity, Long recipe_id) {
-        this.name = name;
-        this.quantity = quantity;
-        this.recipe_id = recipe_id;
+      this(null, name, quantity, recipe_id);
     }
 }

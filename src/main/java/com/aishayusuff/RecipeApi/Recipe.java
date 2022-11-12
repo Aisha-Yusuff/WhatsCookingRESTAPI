@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -12,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 
+@Data
 @Entity
 @Table(name = "recipes")
 public class Recipe {
@@ -22,6 +24,8 @@ public class Recipe {
     private String name;
 
     private String instructions;
+//    private List<String> instructions;
+
 
     //   One to many unidirectional mapping
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -29,13 +33,7 @@ public class Recipe {
     private Set<Ingredient> ingredients = new HashSet<>();
 
     public Recipe(String name, String instructions, Set<Ingredient> ingredients) {
-        this.name = name;
-        this.instructions = instructions;
-        this.ingredients = ingredients;
+        this(null, name, instructions, ingredients);
     }
 }
 
-/*
-INSERT INTO recipes (name)
-VALUES ("Hard Boiled Eggs");
- */
