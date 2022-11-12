@@ -20,7 +20,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe addNewRecipe(Recipe recipe) {
-//        For each new ingredient save the recipe's id in recipe_id
+//        For each new ingredient save the recipe's id in the recipe_id column
         recipe.getIngredients().stream().forEach( ingredient -> ingredient.setRecipe_id(recipe.getId()));
         return recipeRepository.save(recipe);
     }

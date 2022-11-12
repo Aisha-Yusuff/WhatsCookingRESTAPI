@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 
-@Data
 @Entity
 @Table(name = "recipes")
 public class Recipe {
@@ -23,15 +22,19 @@ public class Recipe {
 
     private String name;
 
-    //   One to many unidirectional mapping
+//       One to many mapping with ingredient entity
+//    Create foreign key (recipe_id) in ingredients table
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name ="recipe_id", referencedColumnName = "id")
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    private String instructions;
-//    private List<String> instructions;
+//    One to many mapping with instruction entity
+//    Create foreign key (recipe_id) in instructions table
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+    private List<Instruction> instructions;
 
-    public Recipe(String name, Set<Ingredient> ingredients, String instructions) {
+    public Recipe(String name, Set<Ingredient> ingredients, List<Instruction> instructions) {
         this(null, name, ingredients, instructions);
     }
 }
