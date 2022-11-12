@@ -23,17 +23,16 @@ public class Recipe {
 
     private String name;
 
-    private String instructions;
-//    private List<String> instructions;
-
-
     //   One to many unidirectional mapping
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name ="recipe_id", referencedColumnName = "id")
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    public Recipe(String name, String instructions, Set<Ingredient> ingredients) {
-        this(null, name, instructions, ingredients);
+    private String instructions;
+//    private List<String> instructions;
+
+    public Recipe(String name, Set<Ingredient> ingredients, String instructions) {
+        this(null, name, ingredients, instructions);
     }
 }
 
