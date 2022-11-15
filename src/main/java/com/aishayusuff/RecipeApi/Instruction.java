@@ -20,6 +20,7 @@ import javax.persistence.Table;
 public class Instruction {
     @Id
     @GeneratedValue
+//    Create step number column
     private Long id;
     private String step_description;
     private Long recipe_id;

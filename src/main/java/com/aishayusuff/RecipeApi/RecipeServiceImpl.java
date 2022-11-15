@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -13,8 +14,6 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getAllRecipes() {
-
-//        return recipeRepository.findAll();
         return (List<Recipe>) recipeRepository.findAll();
     }
 
@@ -23,6 +22,19 @@ public class RecipeServiceImpl implements RecipeService {
 //        For each new ingredient save the recipe's id in the recipe_id column
         recipe.getIngredients().stream().forEach( ingredient -> ingredient.setRecipe_id(recipe.getId()));
         return recipeRepository.save(recipe);
+    }
+
+    @Override
+    public Recipe updateRecipe(String recipeName, Recipe updatedRecipe) {
+//        Find the "existing" recipe
+        Optional<Recipe> existingRecipe = recipeRepository.findByName(recipeName);
+        if (existingRecipe.isPresent()) {
+            Long existingID = existingRecipe.get().getId();
+            updatedRecipe.setId(existingID);
+            recipeRepository.save(updatedRecipe);
+            return updatedRecipe;
+        }
+        throw new IllegalStateException("This recipe cannot be found");
     }
 
 }
