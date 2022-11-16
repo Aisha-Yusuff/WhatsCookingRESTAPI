@@ -26,7 +26,7 @@ public class Recipe {
 //    Create foreign key (recipe_id) in ingredients table
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name ="recipe_id", referencedColumnName = "id")
-    private Set<Ingredient> ingredients = new HashSet<>();
+    private List<Ingredient> ingredients;
 
 //    One to many mapping with instruction entity
 //    Create foreign key (recipe_id) in instructions table
@@ -34,7 +34,7 @@ public class Recipe {
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private List<Instruction> instructions;
 
-    public Recipe(String name, Set<Ingredient> ingredients, List<Instruction> instructions) {
+    public Recipe(String name, List<Ingredient> ingredients, List<Instruction> instructions) {
         this(null, name, ingredients, instructions);
     }
 }

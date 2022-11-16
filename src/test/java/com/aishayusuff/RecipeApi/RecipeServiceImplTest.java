@@ -41,9 +41,9 @@ public class RecipeServiceImplTest {
         Ingredient porridgeOats = new Ingredient("Porridge Oats", "50g", porridgeRecipe.getId());
         Ingredient milk = new Ingredient("Milk", "350ml", porridgeRecipe.getId());
 //        create set to hold all ingredients in the recipe
-        Set<Ingredient> ingredientsSet = new HashSet<>(Arrays.asList(porridgeOats, milk));
+        List<Ingredient> ingredientsList = List.of(porridgeOats, milk);
 //      Add ingredients to recipe
-        porridgeRecipe.setIngredients(ingredientsSet);
+        porridgeRecipe.setIngredients(ingredientsList);
 
 //      create instructions for the recipe
         Instruction porridgeStep1 = new Instruction(null, "Add your porridge oats to your saucepan.", porridgeRecipe.getId());
@@ -93,8 +93,7 @@ public class RecipeServiceImplTest {
         Ingredient stockCubes = new Ingredient("Stock Cubes", "2", vegSoup.getId());
         Ingredient blackPepper = new Ingredient("Black Pepper", "1tbsp", vegSoup.getId());
 //        create set to hold all ingredients in the recipe
-        Set<Ingredient> soupIngredientSet = new HashSet<>(Arrays.asList
-                (water, carrot, potato, stockCubes, blackPepper));
+        List<Ingredient> soupIngredientSet = List.of(water, carrot, potato, stockCubes, blackPepper);
 //        add ingredients to recipe
         vegSoup.setIngredients(soupIngredientSet);
 
@@ -129,9 +128,9 @@ public class RecipeServiceImplTest {
         Ingredient oatMilk = new Ingredient("Oat Milk", "350ml", veganPorridgeRecipe.getId());
         Ingredient sugars = new Ingredient( "Sugar", "1 Teaspoon", veganPorridgeRecipe.getId());
 //        create set to hold all ingredients in the recipe
-        Set<Ingredient> porridgeIngredientsSet = new HashSet<>(Arrays.asList(veganPorridgeOats, oatMilk, sugars));
+        List<Ingredient> porridgeIngredientsList = List.of(veganPorridgeOats, oatMilk, sugars);
 //      Add ingredients to recipe
-        veganPorridgeRecipe.setIngredients(porridgeIngredientsSet);
+        veganPorridgeRecipe.setIngredients(porridgeIngredientsList);
 
 //      create instructions for the recipe
         Instruction veganPorridgeStep1 = new Instruction(null, "Add your porridge oats to your saucepan.", veganPorridgeRecipe.getId());
