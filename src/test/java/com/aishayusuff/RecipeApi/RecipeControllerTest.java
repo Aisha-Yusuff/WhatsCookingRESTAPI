@@ -1,7 +1,6 @@
 package com.aishayusuff.RecipeApi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.*;
+import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
@@ -64,9 +63,9 @@ public class RecipeControllerTest {
         porridgeRecipe.setIngredients(ingredientsList);
 
 //      create instructions for the recipe
-        Instruction porridgeStep1 = new Instruction(null, "Add your porridge oats to your saucepan.", porridgeRecipe.getId());
-        Instruction porridgeStep2 = new Instruction(null, "Pour the milk into the saucepan.", porridgeRecipe.getId());
-        Instruction porridgeStep3 = new Instruction(null, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy",
+        Instruction porridgeStep1 = new Instruction( 1,"Add your porridge oats to your saucepan.", porridgeRecipe.getId());
+        Instruction porridgeStep2 = new Instruction( 2, "Pour the milk into the saucepan.", porridgeRecipe.getId());
+        Instruction porridgeStep3 = new Instruction( 3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy",
                 porridgeRecipe.getId());
 //      create list to hold all instructions in recipe
         List<Instruction> instructionList = List.of(porridgeStep1, porridgeStep2, porridgeStep3);
@@ -113,9 +112,9 @@ public class RecipeControllerTest {
         vegSoup.setIngredients(soupIngredientSet);
 
 //        create ingredients for the recipe
-         Instruction vegSoupStep1 = new Instruction ("Boil the water, stock cubes and black pepper in a medium-sized pot.", vegSoup.getId());
-         Instruction vegSoupStep2 = new Instruction ("Chop your veggies and place them in your pot.", vegSoup.getId());
-         Instruction vegSoupStep3 = new Instruction ("Leave your soup to cook for 25 minutes on a medium heat and then serve.", vegSoup.getId());
+         Instruction vegSoupStep1 = new Instruction (1, "Boil the water, stock cubes and black pepper in a medium-sized pot.", vegSoup.getId());
+         Instruction vegSoupStep2 = new Instruction (2, "Chop your veggies and place them in your pot.", vegSoup.getId());
+         Instruction vegSoupStep3 = new Instruction (3, "Leave your soup to cook for 25 minutes on a medium heat and then serve.", vegSoup.getId());
 //        create list to hold all instructions
         List<Instruction> instructionList = List.of(vegSoupStep1, vegSoupStep2, vegSoupStep3);
 //        add instructions to the recipe
@@ -155,9 +154,9 @@ public class RecipeControllerTest {
         veganPorridgeRecipe.setIngredients(porridgeIngredientsList);
 
 //      create instructions for the recipe
-        Instruction veganPorridgeStep1 = new Instruction(null, "Add your porridge oats to your saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep2 = new Instruction(null, "Pour the Oat Milk into the saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep3 = new Instruction(null, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy", veganPorridgeRecipe.getId());
+        Instruction veganPorridgeStep1 = new Instruction(1, "Add your porridge oats to your saucepan.", veganPorridgeRecipe.getId());
+        Instruction veganPorridgeStep2 = new Instruction(2, "Pour the Oat Milk into the saucepan.", veganPorridgeRecipe.getId());
+        Instruction veganPorridgeStep3 = new Instruction( 3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy", veganPorridgeRecipe.getId());
 //      create list to hold all instructions in recipe
         List<Instruction> porridgeInstructionList = List.of(veganPorridgeStep1, veganPorridgeStep2, veganPorridgeStep3);
 //      Add instructions to recipe

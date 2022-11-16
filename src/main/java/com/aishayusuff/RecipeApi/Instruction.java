@@ -22,10 +22,12 @@ public class Instruction {
     @GeneratedValue
 //    Create step number column
     private Long id;
+    private int step_number;
     private String step_description;
     private Long recipe_id;
 
-    public Instruction(String step_description, Long recipe_id) {
-        this(null, step_description, recipe_id);
+    public Instruction(int step_number, String step_description, Long recipe_id) {
+
+        this(null, step_number, step_description, recipe_id);
     }
 }

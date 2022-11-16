@@ -1,25 +1,17 @@
 package com.aishayusuff.RecipeApi;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 public class RecipeServiceImplTest {
@@ -46,9 +38,9 @@ public class RecipeServiceImplTest {
         porridgeRecipe.setIngredients(ingredientsList);
 
 //      create instructions for the recipe
-        Instruction porridgeStep1 = new Instruction(null, "Add your porridge oats to your saucepan.", porridgeRecipe.getId());
-        Instruction porridgeStep2 = new Instruction(null, "Pour the milk into the saucepan.", porridgeRecipe.getId());
-        Instruction porridgeStep3 = new Instruction(null, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy",
+        Instruction porridgeStep1 = new Instruction(1,"Add your porridge oats to your saucepan.", porridgeRecipe.getId());
+        Instruction porridgeStep2 = new Instruction(2, "Pour the milk into the saucepan.", porridgeRecipe.getId());
+        Instruction porridgeStep3 = new Instruction(3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy",
                 porridgeRecipe.getId());
 //      create list to hold all instructions in recipe
         List<Instruction> instructionList = List.of(porridgeStep1, porridgeStep2, porridgeStep3);
@@ -98,9 +90,9 @@ public class RecipeServiceImplTest {
         vegSoup.setIngredients(soupIngredientSet);
 
 //        create ingredients for the recipe
-        Instruction vegSoupStep1 = new Instruction ("Boil the water, stock cubes and black pepper in a medium-sized pot.", vegSoup.getId());
-        Instruction vegSoupStep2 = new Instruction ("Chop your veggies and place them in your pot.", vegSoup.getId());
-        Instruction vegSoupStep3 = new Instruction ("Leave your soup to cook for 25 minutes on a medium heat and then serve.", vegSoup.getId());
+        Instruction vegSoupStep1 = new Instruction (1, "Boil the water, stock cubes and black pepper in a medium-sized pot.", vegSoup.getId());
+        Instruction vegSoupStep2 = new Instruction (2, "Chop your veggies and place them in your pot.", vegSoup.getId());
+        Instruction vegSoupStep3 = new Instruction (3, "Leave your soup to cook for 25 minutes on a medium heat and then serve.", vegSoup.getId());
 //        create list to hold all instructions
         List<Instruction> instructionList = List.of(vegSoupStep1, vegSoupStep2, vegSoupStep3);
 //        add instructions to the recipe
@@ -115,7 +107,8 @@ public class RecipeServiceImplTest {
 
     @Test
     public void shouldUpdateAnExistingRecipe() throws Exception {
-//      Add recipe to Recipe list
+//     given
+//     Add recipe to Recipe list
         List<Recipe> recipeList = List.of(getDefaultRecipe());
 
 //        build "updated" recipe
@@ -126,19 +119,17 @@ public class RecipeServiceImplTest {
 //        create ingredients for the recipe
         Ingredient veganPorridgeOats = new Ingredient("Porridge Oats", "50g", veganPorridgeRecipe.getId());
         Ingredient oatMilk = new Ingredient("Oat Milk", "350ml", veganPorridgeRecipe.getId());
-        Ingredient sugars = new Ingredient( "Sugar", "1 Teaspoon", veganPorridgeRecipe.getId());
 //        create set to hold all ingredients in the recipe
-        List<Ingredient> porridgeIngredientsList = List.of(veganPorridgeOats, oatMilk, sugars);
+        List<Ingredient> porridgeIngredientsList = List.of(veganPorridgeOats, oatMilk);
 //      Add ingredients to recipe
         veganPorridgeRecipe.setIngredients(porridgeIngredientsList);
 
 //      create instructions for the recipe
-        Instruction veganPorridgeStep1 = new Instruction(null, "Add your porridge oats to your saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep2 = new Instruction(null, "Pour the Oat Milk into the saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep3 = new Instruction(null, "Sprinkle a teaspoon of sugar in to the saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep4 = new Instruction(null, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy", veganPorridgeRecipe.getId());
+        Instruction veganPorridgeStep1 = new Instruction(1, "Add your porridge oats to your saucepan.", veganPorridgeRecipe.getId());
+        Instruction veganPorridgeStep2 = new Instruction(2, "Pour the Oat Milk into the saucepan.", veganPorridgeRecipe.getId());
+        Instruction veganPorridgeStep3 = new Instruction( 3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy", veganPorridgeRecipe.getId());
 //      create list to hold all instructions in recipe
-        List<Instruction> porridgeInstructionList = List.of(veganPorridgeStep1, veganPorridgeStep2, veganPorridgeStep3, veganPorridgeStep4);
+        List<Instruction> porridgeInstructionList = List.of(veganPorridgeStep1, veganPorridgeStep2, veganPorridgeStep3);
 //      Add instructions to recipe
         veganPorridgeRecipe.setInstructions(porridgeInstructionList);
 
