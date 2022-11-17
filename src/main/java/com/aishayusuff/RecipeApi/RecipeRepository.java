@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Repository
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
-    Optional<Recipe> findByName(String name);
+    Optional<Recipe> findById(Long id);
 
 }

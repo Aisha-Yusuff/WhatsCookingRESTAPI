@@ -23,18 +23,18 @@ public class RecipeController {
     }
 
     @PostMapping
-    ResponseEntity<Recipe> addNewRecipe(Recipe recipe) {
+    ResponseEntity<Recipe> addNewRecipe(@RequestBody Recipe recipe) {
         return new ResponseEntity<>(
                 recipeService.addNewRecipe(recipe),
                 HttpStatus.CREATED
         );
     }
 
-    @PutMapping(path = "/{name}")
-    ResponseEntity<Recipe> updateRecipe(@PathVariable("name") String recipeName,
+    @PutMapping(path = "/{id}")
+    ResponseEntity<Recipe> updateRecipe(@PathVariable("id") Long recipeId,
                                         @RequestBody Recipe updatedRecipe) {
-        Recipe latestRecipe = recipeService.updateRecipe(recipeName, updatedRecipe);
-        return new ResponseEntity<Recipe>(latestRecipe, HttpStatus.NO_CONTENT);
+        recipeService.updateRecipe(recipeId, updatedRecipe);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
 
     };
 

@@ -5,6 +5,5 @@ import java.util.List;
 public interface RecipeService {
     List<Recipe> getAllRecipes();
     Recipe addNewRecipe(Recipe recipe);
-    Recipe updateRecipe(String recipeName, Recipe updatedRecipe);
-
+    void updateRecipe(Long recipeId, Recipe updatedRecipe);
 }

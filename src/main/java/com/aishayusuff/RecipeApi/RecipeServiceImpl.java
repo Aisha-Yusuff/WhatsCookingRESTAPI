@@ -21,20 +21,21 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe addNewRecipe(Recipe recipe) {
 //        For each new ingredient save the recipe's id in the recipe_id column
         recipe.getIngredients().stream().forEach( ingredient -> ingredient.setRecipe_id(recipe.getId()));
+        System.out.println(recipe);
         return recipeRepository.save(recipe);
     }
 
     @Override
-    public Recipe updateRecipe(String recipeName, Recipe updatedRecipe) {
-//        Find the "existing" recipe
-        Optional<Recipe> existingRecipe = recipeRepository.findByName(recipeName);
-        if (existingRecipe.isPresent()) {
-            Long existingID = existingRecipe.get().getId();
-            updatedRecipe.setId(existingID);
+    public void updateRecipe(Long recipeId, Recipe updatedRecipe) {
+//        Find the existing recipe
+//        Optional<Recipe> existingRecipe = recipeRepository.findById(recipeId);
+        if (recipeRepository.findById(recipeId).isPresent()) {
+            updatedRecipe.setId(recipeId);
             recipeRepository.save(updatedRecipe);
-            return updatedRecipe;
         }
         throw new IllegalStateException("This recipe cannot be found");
     }
+
+
 
 }
