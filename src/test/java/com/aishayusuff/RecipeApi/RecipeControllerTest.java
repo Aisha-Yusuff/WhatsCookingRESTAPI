@@ -22,11 +22,10 @@ import java.util.Set;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //Spring Test Class
@@ -108,16 +107,15 @@ public class RecipeControllerTest {
         Ingredient carrot = new Ingredient("Carrot", "150g", vegSoup.getId());
         Ingredient potato = new Ingredient("Potato", "1", vegSoup.getId());
         Ingredient stockCubes = new Ingredient("Stock Cubes", "2", vegSoup.getId());
-        Ingredient blackPepper = new Ingredient("Black Pepper", "1tbsp", vegSoup.getId());
 //        create set to hold all ingredients in the recipe
-        Set<Ingredient> soupIngredientSet = new HashSet<>(Arrays.asList(water, carrot, potato, stockCubes, blackPepper));
+        Set<Ingredient> soupIngredientSet = new HashSet<>(Arrays.asList(water, carrot, potato, stockCubes));
 //        add ingredients to recipe
         vegSoup.setIngredients(soupIngredientSet);
 
-//        create ingredients for the recipe
-         Instruction vegSoupStep1 = new Instruction (1, "Boil the water, stock cubes and black pepper in a medium-sized pot.", vegSoup.getId());
+//        create instructions for the recipe
+         Instruction vegSoupStep1 = new Instruction (1, "Boil the water, stock cubes in to your pot.", vegSoup.getId());
          Instruction vegSoupStep2 = new Instruction (2, "Chop your veggies and place them in your pot.", vegSoup.getId());
-         Instruction vegSoupStep3 = new Instruction (3, "Leave your soup to cook for 25 minutes on a medium heat and then serve.", vegSoup.getId());
+         Instruction vegSoupStep3 = new Instruction (3, "Leave your soup to cook for 25 minutes and then serve.", vegSoup.getId());
 //        create list to hold all instructions
         List<Instruction> instructionList = List.of(vegSoupStep1, vegSoupStep2, vegSoupStep3);
 //        add instructions to the recipe
@@ -141,8 +139,6 @@ public class RecipeControllerTest {
 //        given
 //       Create placeholder ID for default recipe
        getDefaultRecipe().setId(1L);
-//      Add recipe to Recipe list
-        List<Recipe> recipeList = List.of(getDefaultRecipe());
 
 //        build "updated" recipe
         Recipe veganPorridgeRecipe = Recipe.builder()
@@ -153,9 +149,9 @@ public class RecipeControllerTest {
         Ingredient veganPorridgeOats = new Ingredient("Porridge Oats", "50g", veganPorridgeRecipe.getId());
         Ingredient oatMilk = new Ingredient("Oat Milk", "350ml", veganPorridgeRecipe.getId());
 //        create set to hold all ingredients in the recipe
-        Set<Ingredient> porridgeingredientsSet = new HashSet<>(Arrays.asList(veganPorridgeOats, oatMilk));
+        Set<Ingredient> porridgeIngredientsSet = new HashSet<>(Arrays.asList(veganPorridgeOats, oatMilk));
 //      Add ingredients to recipe
-        veganPorridgeRecipe.setIngredients(porridgeingredientsSet);
+        veganPorridgeRecipe.setIngredients(porridgeIngredientsSet);
 
 //      create instructions for the recipe
         Instruction veganPorridgeStep1 = new Instruction(1, "Add your porridge oats to your saucepan.", veganPorridgeRecipe.getId());
@@ -166,8 +162,8 @@ public class RecipeControllerTest {
 //      Add instructions to recipe
         veganPorridgeRecipe.setInstructions(porridgeInstructionList);
 
-//        check existing recipe actually exists
-        given(recipeService.getAllRecipes()).willReturn(recipeList);
+//      expect updateRecipeById will not return a value
+        doNothing().when(recipeService).updateRecipeById(getDefaultRecipe().getId(), veganPorridgeRecipe);
 
 //        when - put request
         ResultActions response = mockMvc.perform(put("/recipe/{id}", 1L)
@@ -175,7 +171,21 @@ public class RecipeControllerTest {
                 .content(objectMapper.writeValueAsString(veganPorridgeRecipe)));
 //        then
         response.andExpect(status().isNoContent());
-//        verify(recipeService).updateRecipe(1L, veganPorridgeRecipe);
+    }
+
+    @Test
+    public void shouldDeleteARecipe() throws Exception {
+//        given
+//        create placeholder ID for default recipe
+        getDefaultRecipe().setId(1L);
+
+//      expect deleteRecipeById will not return a value
+        doNothing().when(recipeService).deleteRecipeById(getDefaultRecipe().getId());
+//        when
+        ResultActions response = mockMvc.perform(delete("/recipe/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON));
+//        then
+        response.andExpect(status().isNoContent());
     }
 
 

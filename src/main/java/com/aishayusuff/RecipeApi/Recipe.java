@@ -3,8 +3,6 @@ package com.aishayusuff.RecipeApi;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,26 +21,20 @@ public class Recipe {
 
     private String name;
 
-//       One to many mapping with ingredient entity
+    //       One to many mapping with ingredient entity
 //    Create foreign key (recipe_id) in ingredients table
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name ="recipe_id", referencedColumnName = "id")
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Set<Ingredient> ingredients;
 
-//    One to many mapping with instruction entity
+    //    One to many mapping with instruction entity
 //    Create foreign key (recipe_id) in instructions table
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private List<Instruction> instructions;
-
-//    public Recipe(String name, Set<Ingredient> ingredients, List<Instruction> instructions) {
-//        this(null, name, ingredients, instructions);
-//    }
-
     public Recipe(String name, Set<Ingredient> ingredients, List<Instruction> instructions) {
-        this.name = name;
-        this.ingredients = ingredients;
-        this.instructions = instructions;
+        this(null, name, ingredients, instructions);
     }
+
 }
 

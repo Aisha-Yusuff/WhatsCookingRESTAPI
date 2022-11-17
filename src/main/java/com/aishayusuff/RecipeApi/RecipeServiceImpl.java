@@ -26,7 +26,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void updateRecipe(Long recipeId, Recipe updatedRecipe) {
+    public void updateRecipeById(Long recipeId, Recipe updatedRecipe) {
 //        Find the existing recipe
 //        Optional<Recipe> existingRecipe = recipeRepository.findById(recipeId);
         if (recipeRepository.findById(recipeId).isPresent()) {
@@ -36,7 +36,16 @@ public class RecipeServiceImpl implements RecipeService {
             throw new IllegalStateException("This recipe cannot be found");
         }
     }
+    @Override
+    public void deleteRecipeById(Long recipeId) {
+//        Find the recipe to delete
+        Optional<Recipe> existingRecipe = recipeRepository.findById(recipeId);
+        if(existingRecipe.isPresent()){
+            recipeRepository.deleteById(recipeId);
+        } else {
+            throw new IllegalStateException("This recipe cannot be found");
+        }
 
-
+    }
 
 }

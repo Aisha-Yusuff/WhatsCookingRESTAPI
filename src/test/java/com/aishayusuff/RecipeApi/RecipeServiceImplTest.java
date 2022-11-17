@@ -137,10 +137,25 @@ public class RecipeServiceImplTest {
         given(recipeRepository.findById(any(Long.class))).willReturn(Optional.of(existingRecipe));
 
 //        when
-        recipeService.updateRecipe(existingRecipe.getId(), veganPorridgeRecipe);
+        recipeService.updateRecipeById(existingRecipe.getId(), veganPorridgeRecipe);
 //        then
         verify(recipeRepository).save(veganPorridgeRecipe);
     }
 
+        @Test
+    public void shouldDeleteARecipe() {
+//        given
+        Recipe existingRecipe = getDefaultRecipe();
+//        Create placeholder ID for existing recipe
+        existingRecipe.setId(1L);
+        recipeService.addNewRecipe(existingRecipe);
+
+        given(recipeRepository.findById(any(Long.class))).willReturn(Optional.of(getDefaultRecipe()));
+
+//        when - delete request
+        recipeService.deleteRecipeById(existingRecipe.getId());
+//        then
+        verify(recipeRepository).deleteById(existingRecipe.getId());
+    }
 
 }

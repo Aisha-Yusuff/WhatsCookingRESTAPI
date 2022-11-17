@@ -33,10 +33,14 @@ public class RecipeController {
     @PutMapping(path = "/{id}")
     ResponseEntity<Recipe> updateRecipe(@PathVariable("id") Long recipeId,
                                         @RequestBody Recipe updatedRecipe) {
-        recipeService.updateRecipe(recipeId, updatedRecipe);
+        recipeService.updateRecipeById(recipeId, updatedRecipe);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
 
     };
-
+    @DeleteMapping(path = "/{id}")
+    ResponseEntity<Recipe> deleteRecipeById(@PathVariable("id") Long recipeId){
+        recipeService.deleteRecipeById(recipeId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 
 }
