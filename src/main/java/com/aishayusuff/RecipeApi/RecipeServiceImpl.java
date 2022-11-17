@@ -32,8 +32,9 @@ public class RecipeServiceImpl implements RecipeService {
         if (recipeRepository.findById(recipeId).isPresent()) {
             updatedRecipe.setId(recipeId);
             recipeRepository.save(updatedRecipe);
+        } else {
+            throw new IllegalStateException("This recipe cannot be found");
         }
-        throw new IllegalStateException("This recipe cannot be found");
     }
 
 

@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -106,33 +107,10 @@ public class RecipeServiceImplTest {
     @Test
     public void shouldUpdateAnExistingRecipe()  {
 //     given
-////        Create placeholder ID for default recipe
-//        getDefaultRecipe().setId(1L);
-////     Add recipe to Recipe list
-        Recipe existingRecipe = Recipe.builder()
-                .id(1L)
-                .name("Quick and Easy Porridge")
-                .build();
-
-//        create ingredients for the recipe
-        Ingredient porridgeOats = new Ingredient("Porridge Oats", "50g", existingRecipe.getId());
-        Ingredient milk = new Ingredient("Milk", "350ml", existingRecipe.getId());
-//        create set to hold all ingredients in the recipe
-        Set<Ingredient> IngredientsSet = new HashSet<>(Arrays.asList(porridgeOats, milk));
-//      Add ingredients to recipe
-        existingRecipe.setIngredients(IngredientsSet);
-
-//      create instructions for the recipe
-        Instruction porridgeStep1 = new Instruction(1,"Add your porridge oats to your saucepan.", existingRecipe.getId());
-        Instruction porridgeStep2 = new Instruction(2, "Pour the milk into the saucepan.", existingRecipe.getId());
-        Instruction porridgeStep3 = new Instruction(3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy",
-                existingRecipe.getId());
-//      create list to hold all instructions in recipe
-        List<Instruction> instructionList = List.of(porridgeStep1, porridgeStep2, porridgeStep3);
-//      Add instructions to recipe
-        existingRecipe.setInstructions(instructionList);
+        Recipe existingRecipe = getDefaultRecipe();
+//        Create placeholder ID for existing recipe
+        existingRecipe.setId(1L);
         recipeService.addNewRecipe(existingRecipe);
-        recipeRepository.save(existingRecipe);
 
 //        build "updated" recipe
         Recipe veganPorridgeRecipe = Recipe.builder()
@@ -156,13 +134,12 @@ public class RecipeServiceImplTest {
 //      Add instructions to recipe
         veganPorridgeRecipe.setInstructions(porridgeInstructionList);
 
-//        given(recipeRepository.findById(existingRecipe().getId())).willReturn(Optional.of(existingRecipe()));
+        given(recipeRepository.findById(any(Long.class))).willReturn(Optional.of(existingRecipe));
 
 //        when
         recipeService.updateRecipe(existingRecipe.getId(), veganPorridgeRecipe);
 //        then
         verify(recipeRepository).save(veganPorridgeRecipe);
-//        assertEquals(recipeRepository.findById(1L), Optional.of(veganPorridgeRecipe));
     }
 
 
