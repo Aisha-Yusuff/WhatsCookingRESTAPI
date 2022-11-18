@@ -188,6 +188,21 @@ public class RecipeControllerTest {
         response.andExpect(status().isNoContent());
     }
 
+    @Test
+    public void shouldRetrieveRecipesByIngredientName() throws Exception {
+//        given
+        List<Recipe> recipeList = List.of(getDefaultRecipe());
+
+        given(recipeService.getByIngredientName(any(String.class))).willReturn(recipeList);
+//        when
+        MockHttpServletResponse response = mockMvc.perform(get("/recipe/{ingredientName}", "Porridge Oats")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+//        then
+        then(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        then(response.getContentAsString()).isEqualTo(json.write(recipeList).getJson());
+        verify(recipeService).getByIngredientName(any(String.class));
+    }
 
 
 }

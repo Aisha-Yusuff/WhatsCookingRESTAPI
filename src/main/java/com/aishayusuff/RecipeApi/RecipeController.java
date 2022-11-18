@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/recipe")
@@ -41,6 +40,12 @@ public class RecipeController {
     ResponseEntity<Recipe> deleteRecipeById(@PathVariable("id") Long recipeId){
         recipeService.deleteRecipeById(recipeId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(path = "/{ingredientName}")
+    ResponseEntity<List<Recipe>> getByIngredientName(@PathVariable("ingredientName") String ingredientName) {
+        return new ResponseEntity<>(recipeService.getByIngredientName(ingredientName),
+                HttpStatus.OK);
     }
 
 }

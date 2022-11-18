@@ -3,6 +3,7 @@ package com.aishayusuff.RecipeApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,6 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe addNewRecipe(Recipe recipe) {
 //        For each new ingredient save the recipe's id in the recipe_id column
         recipe.getIngredients().stream().forEach( ingredient -> ingredient.setRecipe_id(recipe.getId()));
-        System.out.println(recipe);
         return recipeRepository.save(recipe);
     }
 
@@ -46,6 +46,26 @@ public class RecipeServiceImpl implements RecipeService {
             throw new IllegalStateException("This recipe cannot be found");
         }
 
+    }
+
+    @Override
+    public List<Recipe> getByIngredientName(String ingredientName) {
+//     find all occurrences of the ingredient in the ingredient table
+        List<Ingredient> ingredientList = recipeRepository.findByIngredientName(ingredientName);
+        if (!ingredientList.isEmpty()) {
+            List<Recipe> recipesList = new ArrayList<>();
+
+//        extract the recipe id from all ingredient in the list
+            for (Ingredient ingredient : ingredientList) {
+                Long recipeId = ingredient.getRecipe_id();
+                Optional<Recipe> matchingRecipe = recipeRepository.findById(recipeId);
+                recipesList.add(matchingRecipe.get());
+            }
+            return recipesList;
+
+        } else {
+            throw new IllegalStateException("This recipe cannot be found");
+        }
     }
 
 }

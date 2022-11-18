@@ -7,6 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -156,6 +158,22 @@ public class RecipeServiceImplTest {
         recipeService.deleteRecipeById(existingRecipe.getId());
 //        then
         verify(recipeRepository).deleteById(existingRecipe.getId());
+    }
+
+    @Test
+    public void ShouldRetrieveRecipesByIngredientName() {
+//        given
+//        create "expected" list of ingredient - porridge oats for getDefaultRecipe
+        Stream<Ingredient> porridgeOatsStream = getDefaultRecipe().getIngredients().stream()
+                .filter(ingredient -> ingredient.getName().equals("Porridge Oats"));
+        List<Ingredient> porridgeOats = porridgeOatsStream.collect(Collectors.toList());
+
+        given(recipeRepository.findByIngredientName(any(String.class))).willReturn(porridgeOats);
+        given(recipeRepository.findById(porridgeOats.get(0).getRecipe_id())).willReturn(Optional.of(getDefaultRecipe()));
+
+        recipeService.getByIngredientName("Porridge Oats");
+        assertEquals(porridgeOats, recipeRepository.findByIngredientName(("Porridge Oats")));
+
     }
 
 }
