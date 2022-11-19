@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    @Query("SELECT i FROM Ingredient i WHERE i.name = :ingredientName")
-    List<Ingredient> findByIngredientName(String ingredientName);
+
 
 }

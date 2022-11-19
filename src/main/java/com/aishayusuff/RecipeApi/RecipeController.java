@@ -42,7 +42,7 @@ public class RecipeController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(path = "/{ingredientName}")
+    @GetMapping(path = "/ingredient/{ingredientName}")
     ResponseEntity<List<Recipe>> getByIngredientName(@PathVariable("ingredientName") String ingredientName) {
         return new ResponseEntity<>(recipeService.getByIngredientName(ingredientName),
                 HttpStatus.OK);

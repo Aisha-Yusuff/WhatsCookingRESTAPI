@@ -168,11 +168,11 @@ public class RecipeServiceImplTest {
                 .filter(ingredient -> ingredient.getName().equals("Porridge Oats"));
         List<Ingredient> porridgeOats = porridgeOatsStream.collect(Collectors.toList());
 
-        given(recipeRepository.findByIngredientName(any(String.class))).willReturn(porridgeOats);
+        given(ingredientRepository.findByName(any(String.class))).willReturn(porridgeOats);
         given(recipeRepository.findById(porridgeOats.get(0).getRecipe_id())).willReturn(Optional.of(getDefaultRecipe()));
 
         recipeService.getByIngredientName("Porridge Oats");
-        assertEquals(porridgeOats, recipeRepository.findByIngredientName(("Porridge Oats")));
+        assertEquals(porridgeOats, ingredientRepository.findByName(("Porridge Oats")));
 
     }
 

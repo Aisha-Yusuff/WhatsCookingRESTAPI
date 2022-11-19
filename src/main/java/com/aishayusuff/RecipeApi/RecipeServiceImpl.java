@@ -21,6 +21,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe addNewRecipe(Recipe recipe) {
 //        For each new ingredient save the recipe's id in the recipe_id column
+//        Cascade - saves recipe id for instructions too
         recipe.getIngredients().stream().forEach( ingredient -> ingredient.setRecipe_id(recipe.getId()));
         return recipeRepository.save(recipe);
     }
@@ -51,21 +52,24 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<Recipe> getByIngredientName(String ingredientName) {
 //     find all occurrences of the ingredient in the ingredient table
-        List<Ingredient> ingredientList = recipeRepository.findByIngredientName(ingredientName);
-        if (!ingredientList.isEmpty()) {
+
+        System.out.println(ingredientName);
+        List<Ingredient> ingredientList = ingredientRepository.findByName(ingredientName);
             List<Recipe> recipesList = new ArrayList<>();
+        System.out.println("the ingredientlist");
+        System.out.println(ingredientList);
 
 //        extract the recipe id from all ingredient in the list
             for (Ingredient ingredient : ingredientList) {
                 Long recipeId = ingredient.getRecipe_id();
+                System.out.println(ingredient.getRecipe_id());
+                System.out.println(recipeId);
                 Optional<Recipe> matchingRecipe = recipeRepository.findById(recipeId);
                 recipesList.add(matchingRecipe.get());
             }
             return recipesList;
 
-        } else {
-            throw new IllegalStateException("This recipe cannot be found");
         }
     }
 
-}
+

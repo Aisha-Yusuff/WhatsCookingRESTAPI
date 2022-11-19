@@ -195,7 +195,7 @@ public class RecipeControllerTest {
 
         given(recipeService.getByIngredientName(any(String.class))).willReturn(recipeList);
 //        when
-        MockHttpServletResponse response = mockMvc.perform(get("/recipe/{ingredientName}", "Porridge Oats")
+        MockHttpServletResponse response = mockMvc.perform(get("/recipe/ingredient/{ingredientName}", "Porridge Oats")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 //        then
