@@ -56,14 +56,11 @@ public class RecipeServiceImpl implements RecipeService {
         System.out.println(ingredientName);
         List<Ingredient> ingredientList = ingredientRepository.findByName(ingredientName);
             List<Recipe> recipesList = new ArrayList<>();
-        System.out.println("the ingredientlist");
-        System.out.println(ingredientList);
+
 
 //        extract the recipe id from all ingredient in the list
             for (Ingredient ingredient : ingredientList) {
                 Long recipeId = ingredient.getRecipe_id();
-                System.out.println(ingredient.getRecipe_id());
-                System.out.println(recipeId);
                 Optional<Recipe> matchingRecipe = recipeRepository.findById(recipeId);
                 recipesList.add(matchingRecipe.get());
             }
