@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { RecipeCard } from "../components/RecipeCard";
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -15,36 +17,14 @@ export const Home = () => {
     fetchRecipes();
   }, []);
 
-  return recipes.map((recipe, index) => {
-    return (
-      <div className="bg-blue-100">
-        {/* recipe */}
-        <div key={index}>
-          <h1>{recipe.name}</h1>
-
-          {/* ingredients  */}
-          <div>
-            {recipe.ingredients.map((ingredient) => (
-              <div>
-                <p>
-                  {ingredient.quantity} {ingredient.name}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* instructions */}
-          <div>
-            {recipe.instructions.map((instruction) => (
-              <div>
-                <p>
-                  {instruction.step_number}. {instruction.step_description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  });
+  return (
+    <div className="container grid grid-cols-3 gap-20 mx-auto">
+      {recipes.map((recipe, index) => (
+        <Link to={{ pathname: recipe.name, state: recipe }} key={index}>
+          <RecipeCard name={recipe.name} image_url={recipe.imageURI} />
+        </Link>
+      ))}
+      ;
+    </div>
+  );
 };
