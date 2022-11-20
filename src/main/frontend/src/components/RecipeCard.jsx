@@ -1,4 +1,4 @@
-export const RecipeCard = ({ name, image_url, ingredients }) => {
+export const RecipeCard = ({ name, image_url }) => {
   return (
     <div className="card container rounded-lg shadow-lg bg-white transform transition-all hover:-translate-y-1 duration-100">
       <img
