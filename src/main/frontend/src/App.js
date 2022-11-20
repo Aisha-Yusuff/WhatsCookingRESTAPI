@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { RecipeForm } from "./pages/RecipeForm";
-import { SearchResults } from "./pages/SearchResults";
+import { Recipe } from "./pages/Recipe";
 
 function App() {
   return (
@@ -10,8 +10,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/recipes" element={<Home />} />
-          <Route path="/results" element={<SearchResults />} />
           <Route path="/recipeForm" element={<RecipeForm />} />
+          <Route path="/recipeName" element={<Recipe />} />
         </Routes>
       </Router>
     </div>
