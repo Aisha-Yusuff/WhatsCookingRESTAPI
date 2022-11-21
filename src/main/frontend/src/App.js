@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { RecipeForm } from "./pages/RecipeForm";
 import { Recipe } from "./pages/Recipe";
+import { Search } from "./components/Search";
+import { SearchResults } from "./pages/SearchResults";
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
           <Route path="/recipes" element={<Home />} />
           <Route path="/recipeForm" element={<RecipeForm />} />
           <Route path="/displayRecipe/:name" element={<Recipe />} />
+          <Route path="/results/:search" element={<SearchResults />}></Route>
         </Routes>
       </Router>
     </div>

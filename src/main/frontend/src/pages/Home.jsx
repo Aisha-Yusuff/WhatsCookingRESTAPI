@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { RecipeCard } from "../components/RecipeCard";
+import { Search } from "../components/Search";
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -18,17 +19,21 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="container grid grid-cols-3 gap-20 mx-auto">
-      {recipes.map((recipe, index) => (
-        <Link
-          to={`/displayRecipe/${recipe.name}`}
-          state={`${recipe.name}`}
-          key={index}
-        >
-          <RecipeCard name={recipe.name} image_url={recipe.imageURI} />
-        </Link>
-      ))}
-      ;
+    <div>
+      <Search />
+
+      <div className="container grid grid-cols-3 gap-20 mx-auto">
+        {recipes.map((recipe, index) => (
+          <Link
+            to={`/displayRecipe/${recipe.name}`}
+            state={`${recipe.name}`}
+            key={index}
+          >
+            <RecipeCard name={recipe.name} image_url={recipe.imageURI} />
+          </Link>
+        ))}
+        ;
+      </div>
     </div>
   );
 };
