@@ -41,7 +41,7 @@ As a user,
 I want to be able to delete a recipe, 
 When I no longer want to share it.
 ```
-## Software Development Lifecycle
+## Project Approach
 
 Although, this was a solo project I conducted stand ups where I reminded myself of what issues I had completed, what features I was working on at the time and address any blockers I may be experiencing. This project consisted of two sprints that each lasted a week. At the end of each sprint, I held a retrospective where I was able to evaluate my processes, analyse my backlog, check if I had reached the milestones I had created in my sprint planning session, identify what practises were successful and where improvements could be made.
 
