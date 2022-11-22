@@ -22,17 +22,12 @@ export const Home = () => {
     <div>
       <Search />
 
-      <div className="container grid grid-cols-3 gap-20 mx-auto">
+      <div className="w-fit mx-auto mt-10 mb-5 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14">
         {recipes.map((recipe, index) => (
-          <Link
-            to={`/displayRecipe/${recipe.name}`}
-            state={`${recipe.name}`}
-            key={index}
-          >
+          <Link to={`/displayRecipe/${recipe.id}`} key={index}>
             <RecipeCard name={recipe.name} image_url={recipe.imageURI} />
           </Link>
         ))}
-        ;
       </div>
     </div>
   );

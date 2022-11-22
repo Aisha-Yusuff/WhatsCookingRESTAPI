@@ -12,8 +12,8 @@ export const Search = () => {
   };
 
   return (
-    <div class="flex flex-col p-60 py-6  m-h-screen">
-      <div class="bg-white items-center justify-between w-full flex rounded-lg shadow-lg p-2 mb-10">
+    <div className="flex flex-col p-60 py-6  m-h-screen">
+      <div className="bg-white items-center justify-between w-full flex rounded-lg shadow-lg p-2 mt-10 mb-8">
         <form onSubmit={submitHandler} className="w-full">
           <div className="flex">
             <input
@@ -23,7 +23,7 @@ export const Search = () => {
               onChange={(e) => setInput(e.target.value)}
               className="font-bold uppercase rounded-lg w-full py-4 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-md"
             />
-            <TbSearch className="flex mt-3 mb-3 m-4 w-8 h-8 text-gray-300 font-bold" />
+            <TbSearch className="flex mt-3 mb-3 m-4 w-8 h-8 text-gray-300 font-semibold" />
           </div>
         </form>
       </div>

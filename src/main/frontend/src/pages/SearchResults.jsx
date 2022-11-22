@@ -32,8 +32,8 @@ export const SearchResults = () => {
       <div className="container grid grid-cols-3 gap-20 mx-auto">
         {recipeMatches.map((recipe, index) => (
           <Link
-            to={`/displayRecipe/${recipe.name}`}
-            state={`${recipe.name}`}
+            to={`/displayRecipe/${recipe.id}`}
+            state={`${recipe.id}`}
             key={index}
           >
             <RecipeCard name={recipe.name} image_url={recipe.imageURI} />

@@ -1,16 +1,20 @@
 export const RecipeCard = ({ name, image_url }) => {
   return (
-    <div className="card container rounded-lg shadow-lg bg-white transform transition-all hover:-translate-y-1 duration-100">
+    <div className="w-72 bg-white shadow-md rounded-xl duration-300 hover:scale-105 hover:shadow-xl">
       <img
         src={image_url}
-        className="card-image h-1/2 w-full rounded-tl-lg rounded-tr-lg"
         alt={name}
+        className="h-80 w-72 object-cover rounded-t-xl"
       />
-      <div className="p-6">
-        <h3 className="card-title font-bold mb-4 text-xl">{name}</h3>
-        <button className="bg-gray-300 hover:bg-gray-400 text-gray-900 hover:text-white font-bold py-2 px-6 rounded">
-          View Recipe
-        </button>
+      <div className="px-5 py-3 pb-6 w-72">
+        <p className="text-lg font-bold capitalize text-black truncate block">
+          {name}
+        </p>
+        <div className="flex items-center">
+          <button className="bg-gray-300 hover:bg-gray-400 text-white text-sm mt-4 px-1 py-0.5 font-semibold hover:text-white rounded-sm">
+            View Recipe
+          </button>
+        </div>
       </div>
     </div>
   );
