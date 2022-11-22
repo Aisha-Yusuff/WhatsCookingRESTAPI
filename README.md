@@ -150,6 +150,7 @@ This application currently uses a PostgreSQL relational database.
 The database contains 3 tables: Recipes, Ingredients and Instructions. The Recipes and Ingredients tables contain a One to Many relationship. This means one record in the Recipes table is associated with more than one record in the Ingredients table. This relationship also exists with the Recipe and Instructions tables. The tables are joined by creating a Foreign Key column in the child table which holds a reference to the Primary Key found in the parent table (Recipes).
 
 Here is a diagram of the database schema:
+
 <img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/DatabaseSchema.png" alt="project-database-schema" width="500"/>
 
 ## Roadmap
