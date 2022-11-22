@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { MdOutlineDeleteForever } from "react-icons/md";
+import { ImBin } from "react-icons/im";
 
 export const Recipe = () => {
   let params = useParams();
@@ -19,46 +21,59 @@ export const Recipe = () => {
   }, []);
 
   return (
-    <div className="container my-auto mx-auto">
-      <h2 className="font-bold text-3xl mb-8 capitalize">{details.name}</h2>
-      <div className="flex">
-        <img
-          src={details.imageURI}
-          className="w-1/3 h-1/3 mr-1 rounded-md"
-          alt={details.name}
-        />
-        <div className="pt-0 p-8">
-          <div className="grid grid cols-2 gap-x-20 gap-y-4 rounded-lg bg-gray-50 shadow-sm p-2">
-            <p className="text-xl font-semibold pl-2 pb-0 p-6">Ingredients</p>
-            {details.ingredients?.map((ingredient, index) => {
-              return (
-                <div key={index}>
-                  <ul>
-                    <li className="pl-2 text-md">
-                      {ingredient.quantity} {ingredient.name}
-                    </li>
-                    <hr className="my-4 mx-auto h-1 bg-gray-100 rounded border-0 md:my-4"></hr>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <div className="grid grid cols-2 gap-x-20 gap-y-4 rounded-lg bg-gray-50 shadow-sm p-6">
-            <p className="text-xl font-semibold pl-2 pb-0">Instructions</p>
-            {details.instructions?.map((instruction, index) => {
-              return (
-                <div key={index}>
-                  <ul>
-                    <li className="pl-2 text-md">
-                      {instruction.step_number}. {instruction.step_description}
-                    </li>
-                    <hr class="my-4 mx-auto h-0.5 bg-gray-100 rounded border-0 md:my-4"></hr>
-                  </ul>
-                </div>
-              );
-            })}
+    <div className="text-gray-700 body-font overflow-hidden bg-white">
+      <div className="container px-5 py-24 mx-auto">
+        <div className="lg:w-5/6 mx-auto flex flex-wrap">
+          <img
+            alt={details.name}
+            className="lg:w-1/2 w-full object-cover object-center rounded border"
+            src={details.imageURI}
+          />
+          <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-5 lg:mt-0">
+            <h1 className="text-gray-900 text-4xl title-font font-semibold mb-3 capitalize">
+              {details.name}
+            </h1>
+            <button className=" flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-0.5 ml-2 focus:outline-none hover:bg-red-600 rounded-sm">
+              Delete
+            </button>
+            <button className="flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-2 focus:outline-none hover:bg-green-600 rounded-sm">
+              Update
+            </button>
+            <div className="mt-4 w-full">
+              <div className="bg-gray-100 p-2 py-5 pr-5 pb-0 rounded-md">
+                <p className="text-xl font-semibold pl-2 pb-4">Ingredients</p>
+                {details.ingredients?.map((ingredient, index) => {
+                  return (
+                    <div key={index}>
+                      <ul>
+                        <li className="pl-2 text-lg pb-2">
+                          {ingredient.quantity} {ingredient.name}
+                        </li>
+                      </ul>
+                    </div>
+                  );
+                })}
+
+                <div className="flex items-center pb-5 border-b-2 border-gray-200 mb-5"></div>
+
+                <p className="text-xl font-semibold pl-2 pb-4">Instructions</p>
+                {details.instructions
+                  ?.sort((a, b) => (a.step_number > b.step_number ? 1 : -1))
+                  .map((instruction, index) => {
+                    return (
+                      <div key={index}>
+                        <ul>
+                          <li className="pl-2 text-lg">
+                            {instruction.step_number}.{" "}
+                            {instruction.step_description}
+                          </li>
+                          <hr className="my-4 mx-auto h-0.5 bg-gray-200 rounded border-0 md:my-4"></hr>
+                        </ul>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
