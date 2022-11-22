@@ -19,8 +19,8 @@ export const Recipe = () => {
   }, []);
 
   return (
-    <div className="container my-auto mx-auto bg-blue-200">
-      <h2 className="font-bold text-3xl mb-8 ">{details.name}</h2>
+    <div className="container my-auto mx-auto">
+      <h2 className="font-bold text-3xl mb-8 capitalize">{details.name}</h2>
       <div className="flex">
         <img
           src={details.imageURI}
@@ -29,15 +29,15 @@ export const Recipe = () => {
         />
         <div className="pt-0 p-8">
           <div className="grid grid cols-2 gap-x-20 gap-y-4 rounded-lg bg-gray-50 shadow-sm p-2">
-            <p className="text-lg font-semibold pl-2 pb-0 p-6">Ingredients</p>
-            {details.ingredients?.map((ingredient) => {
+            <p className="text-xl font-semibold pl-2 pb-0 p-6">Ingredients</p>
+            {details.ingredients?.map((ingredient, index) => {
               return (
-                <div key={ingredient.id}>
+                <div key={index}>
                   <ul>
                     <li className="pl-2 text-md">
                       {ingredient.quantity} {ingredient.name}
                     </li>
-                    <hr class="my-4 mx-auto h-1 bg-gray-100 rounded border-0 md:my-4"></hr>
+                    <hr className="my-4 mx-auto h-1 bg-gray-100 rounded border-0 md:my-4"></hr>
                   </ul>
                 </div>
               );
@@ -46,13 +46,13 @@ export const Recipe = () => {
         </div>
         <div>
           <div className="grid grid cols-2 gap-x-20 gap-y-4 rounded-lg bg-gray-50 shadow-sm p-6">
-            <p className="text-lg font-semibold pl-2 pb-0">Instructions</p>
-            {details.instructions?.map((instruction) => {
+            <p className="text-xl font-semibold pl-2 pb-0">Instructions</p>
+            {details.instructions?.map((instruction, index) => {
               return (
-                <div key={instruction.id}>
+                <div key={index}>
                   <ul>
                     <li className="pl-2 text-md">
-                      {instruction.step_number} {instruction.step_description}
+                      {instruction.step_number}. {instruction.step_description}
                     </li>
                     <hr class="my-4 mx-auto h-0.5 bg-gray-100 rounded border-0 md:my-4"></hr>
                   </ul>
