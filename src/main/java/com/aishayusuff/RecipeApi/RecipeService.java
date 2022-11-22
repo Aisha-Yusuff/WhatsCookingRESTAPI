@@ -9,4 +9,5 @@ public interface RecipeService {
     void updateRecipeById(Long id, Recipe veganPorridgeRecipe);
     void deleteRecipeById(Long id);
     List<Recipe> getByIngredientName(String ingredientName);
+    Optional<Recipe> getById(Long recipeId);
 }

@@ -49,4 +49,9 @@ public class RecipeController {
                 HttpStatus.OK);
     }
 
+    @GetMapping(path = "/{id}")
+    ResponseEntity<Recipe> getById(@PathVariable("id") Long recipeId){
+        return new ResponseEntity(recipeService.getById(recipeId), HttpStatus.OK);
+    }
+
 }
