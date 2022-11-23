@@ -21,6 +21,12 @@ export const Recipe = () => {
     fetchRecipeDetails(params.id);
   }, []);
 
+  const deleteRecipe = (id) => {
+    axios.delete(`http://localhost:8080/recipe/${id}`).then(() => {
+      console.log("This recipe was successfully deleted.");
+    });
+  };
+
   return (
     <div className="text-gray-700 body-font overflow-hidden bg-white">
       <div className="container px-5 py-24 mx-auto">
@@ -34,9 +40,17 @@ export const Recipe = () => {
             <h1 className="text-gray-900 text-4xl title-font font-semibold mb-3 capitalize">
               {details.name}
             </h1>
-            <button className=" flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-1 focus:outline-none hover:bg-red-600 rounded-sm">
-              Delete
-            </button>
+            <a href="http://localhost:3000/recipes">
+              <button
+                onClick={() => {
+                  deleteRecipe(details.id);
+                }}
+                className=" flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-1 focus:outline-none hover:bg-red-600 rounded-sm"
+              >
+                Delete
+              </button>
+            </a>
+
             <Link to={`/updateRecipe/${details.id}`}>
               <button className="flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-3 focus:outline-none hover:bg-green-600 rounded-sm">
                 Update
