@@ -50,7 +50,7 @@ To organise this project I created a GitLab Issues Board which consisted of 5 li
 
 Milestones were created for each user story and assigned to issues. This help track progress and set a time period for each feature. I also organised issues using labels to separate the issues that were to be completed in the first sprint and the second sprint.
 
-<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/issueBoard.png" alt="project-gitlab-issue-board" width="600"/>
+<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/issueBoard.png" alt="project-gitlab-issue-board"/>
 
 To visualise the structure of this application, I created a diagram to understand how the controller, service, repository, model layers and the database interact with each other.
 
