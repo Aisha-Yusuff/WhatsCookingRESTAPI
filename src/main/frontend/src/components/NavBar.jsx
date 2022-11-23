@@ -2,8 +2,8 @@ import { GiForkKnifeSpoon } from "react-icons/gi";
 import { Link } from "react-router-dom";
 export const NavBar = () => {
   return (
-    <div className="bg-gray-100 w-screen">
-      <div className="w-screen shadow-md py-6 px-2 bg-white">
+    <div className="bg-gray-100 w-full">
+      <div className="w-screen shadow-md py-6 bg-white">
         <div className="flex container mx-auto my-auto">
           <div className=" mr-1.5 p-1.5 bg-gray-200 rounded-xl">
             <GiForkKnifeSpoon className="text-2xl" />

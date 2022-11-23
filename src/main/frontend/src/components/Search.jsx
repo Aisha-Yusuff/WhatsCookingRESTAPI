@@ -12,8 +12,8 @@ export const Search = () => {
   };
 
   return (
-    <div className="flex flex-col p-60 py-6  m-h-screen">
-      <div className="bg-white items-center justify-between w-full flex rounded-lg shadow-lg p-2 mt-10 mb-8">
+    <div className="flex flex-col p-60 py-2  m-h-screen">
+      <div className="bg-white items-center justify-between w-full flex rounded-lg shadow-lg p-2 mt-2 mb-6">
         <form onSubmit={submitHandler} className="w-full">
           <div className="flex">
             <input
