@@ -45,9 +45,9 @@ public class RecipeServiceImplTest {
         Instruction porridgeStep3 = new Instruction(3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy",
                 porridgeRecipe.getId());
 //      create list to hold all instructions in recipe
-        List<Instruction> instructionList = List.of(porridgeStep1, porridgeStep2, porridgeStep3);
+        Set<Instruction> instructionSet = new HashSet<>((Arrays.asList(porridgeStep1, porridgeStep2, porridgeStep3)));
 //      Add instructions to recipe
-        porridgeRecipe.setInstructions(instructionList);
+        porridgeRecipe.setInstructions(instructionSet);
         return porridgeRecipe;
     }
 
@@ -96,9 +96,9 @@ public class RecipeServiceImplTest {
         Instruction vegSoupStep2 = new Instruction (2, "Chop your veggies and place them in your pot.", vegSoup.getId());
         Instruction vegSoupStep3 = new Instruction (3, "Leave your soup to cook for 25 minutes on a medium heat and then serve.", vegSoup.getId());
 //        create list to hold all instructions
-        List<Instruction> instructionList = List.of(vegSoupStep1, vegSoupStep2, vegSoupStep3);
+        Set<Instruction> instructionSet = new HashSet<>(Arrays.asList(vegSoupStep1, vegSoupStep2, vegSoupStep3));
 //        add instructions to the recipe
-        vegSoup.setInstructions(instructionList);
+        vegSoup.setInstructions(instructionSet);
 
         given(recipeRepository.save(vegSoup)).willReturn(vegSoup);
 //        when
@@ -133,9 +133,9 @@ public class RecipeServiceImplTest {
         Instruction veganPorridgeStep2 = new Instruction(2, "Pour the Oat Milk into the saucepan.", veganPorridgeRecipe.getId());
         Instruction veganPorridgeStep3 = new Instruction( 3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy", veganPorridgeRecipe.getId());
 //      create list to hold all instructions in recipe
-        List<Instruction> porridgeInstructionList = List.of(veganPorridgeStep1, veganPorridgeStep2, veganPorridgeStep3);
+        Set<Instruction> porridgeInstructionSet = new HashSet<>(Arrays.asList(veganPorridgeStep1, veganPorridgeStep2, veganPorridgeStep3));
 //      Add instructions to recipe
-        veganPorridgeRecipe.setInstructions(porridgeInstructionList);
+        veganPorridgeRecipe.setInstructions(porridgeInstructionSet);
 
         given(recipeRepository.findById(any(Long.class))).willReturn(Optional.of(existingRecipe));
 
