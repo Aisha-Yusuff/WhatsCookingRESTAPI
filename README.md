@@ -50,15 +50,15 @@ To organise this project I created a GitLab Issues Board which consisted of 5 li
 
 Milestones were created for each user story and assigned to issues. This help track progress and set a time period for each feature. I also organised issues using labels to separate the issues that were to be completed in the first sprint and the second sprint.
 
-<p align="center">
+
 <img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/issueBoard.png" alt="project-gitlab-issue-board" width="800"/>
-</p>
+
 
 To visualise the structure of this application, I created a diagram to understand how the controller, service, repository, model layers and the database interact with each other.
 
-<p align="center">
+
 <img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/RecipeRestAPI-diagram.png" alt="project-diagram" width="800">
-</p>
+
 
 ### Implementation
 The design patterns used to build this REST API include the Builder pattern and the Adapter pattern.
@@ -146,9 +146,9 @@ Here is a walkthrough of the website:
 
 ## Open API Documentation
 An Open API doc for this REST API can be found [here](openapi.yaml). It can be used to test the API's endpoints directly on the GitLab.com website.
-<p align="center">
+
 <img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/Openapi.png"  alt="OpenApi-swagger-ui" width="800"/>
-</p>
+
 
 ## Database
 This application currently uses a PostgreSQL relational database.
@@ -156,9 +156,9 @@ This application currently uses a PostgreSQL relational database.
 The database contains 3 tables: Recipes, Ingredients and Instructions. The Recipes and Ingredients tables contain a One to Many relationship. This means one record in the Recipes table is associated with more than one record in the Ingredients table. This relationship also exists with the Recipe and Instructions tables. The tables are joined by creating a Foreign Key column in the child table which holds a reference to the Primary Key found in the parent table (Recipes).
 
 Here is a diagram of the database schema:
-<p align="center">
-<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/DatabaseSchema.png" alt="project-database-schema" width="700"/>
-</p>
+
+<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/DatabaseSchema.png" alt="project-database-schema" width="800"/>
+
 
 ## Roadmap
 In the future I would like to implement the following features:
