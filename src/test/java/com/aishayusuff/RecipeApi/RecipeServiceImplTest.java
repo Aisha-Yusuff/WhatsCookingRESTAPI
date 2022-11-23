@@ -78,6 +78,7 @@ public class RecipeServiceImplTest {
 //        build a new recipe to add to recipe list
         Recipe vegSoup = Recipe.builder()
                 .name("Veggie Soup for One")
+                .imageURI("s3://recipeapi-images/vegSoup.jpg")
                 .build();
 //        create ingredients for the recipe
         Ingredient water = new Ingredient("Water", "500ml", vegSoup.getId());

@@ -15,7 +15,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getAllRecipes() {
-        return (List<Recipe>) recipeRepository.findAll();
+        return recipeRepository.findAll();
     }
 
     @Override
@@ -56,19 +56,23 @@ public class RecipeServiceImpl implements RecipeService {
         System.out.println(ingredientName);
         List<Ingredient> ingredientList = ingredientRepository.findByName(ingredientName);
             List<Recipe> recipesList = new ArrayList<>();
-        System.out.println("the ingredientlist");
-        System.out.println(ingredientList);
+
 
 //        extract the recipe id from all ingredient in the list
             for (Ingredient ingredient : ingredientList) {
                 Long recipeId = ingredient.getRecipe_id();
-                System.out.println(ingredient.getRecipe_id());
+                System.out.println("Recipe ID = ");
                 System.out.println(recipeId);
                 Optional<Recipe> matchingRecipe = recipeRepository.findById(recipeId);
-                recipesList.add(matchingRecipe.get());
+                matchingRecipe.ifPresent(recipesList::add);
             }
             return recipesList;
 
+        }
+
+        @Override
+    public Optional<Recipe> getById(Long recipeId) {
+        return recipeRepository.findById(recipeId);
         }
     }
 

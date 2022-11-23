@@ -1,92 +1,163 @@
-# RecipeApi
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/ay36/RecipeAPI.git
-git branch -M main
-git push -uf origin main
-
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/ay36/RecipeAPI/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+# What's Cooking?
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+A Recipe REST API allowing users to discover a range of recipes and share their favourite recipes.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## Features
+- User can view all recipes
+- User can find a recipe by searching by ingredient
+- User can create a recipe
+- User can update a recipe
+- User can delete a recipe
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## User Stories
+```
+As a user, 
+I want to be able to retrieve all the recipes,
+So that I can find a recipe to cook.
+```
+```
+As a user, 
+I want to be able to retrieve recipes with specific ingredients,
+So that I can cook a recipe with ingredients I already have
+```
+```
+As a user, 
+I want to be able to create a new recipe, 
+So that I can share my own recipes.
+```
+```
+As a user, 
+I want to add an image to my recipe, 
+So I can share how delicious my food looks.
+```
+```
+As a user, 
+I want to be able to edit a recipe, 
+So that I can update my recipes over time.
+```
+```
+As a user, 
+I want to be able to delete a recipe, 
+When I no longer want to share it.
+```
+## Project Approach
+
+Although, this was a solo project I conducted stand ups where I reminded myself of what issues I had completed, what features I was working on at the time and address any blockers I may be experiencing. This project consisted of two sprints that each lasted a week. At the end of each sprint, I held a retrospective where I was able to evaluate my processes, analyse my backlog, check if I had reached the milestones I had created in my sprint planning session, identify what practises were successful and where improvements could be made.
+
+### Planning and Design
+To organise this project I created a GitLab Issues Board which consisted of 5 lists: Open, Task, Work in Progress, Blocked and Closed. The user stories were stored in the open list, the backlog was held  in the task list, the issues being worked on at the time were kept in the work in progress list and blockers in the blocked list. Once an issue had been completed it was moved into the closed list.
+
+Milestones were created for each user story and assigned to issues. This help track progress and set a time period for each feature. I also organised issues using labels to separate the issues that were to be completed in the first sprint and the second sprint.
+
+<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/issueBoard.png" alt="project-gitlab-issue-board" width="500"/>
+
+To visualise the structure of this application, I created a diagram to understand how the controller, service, repository, model layers and the database interact with each other.
+
+<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/RecipeRestAPI-diagram.png" alt="project-diagram" width="500">
+
+### Implementation
+The design patterns used to build this REST API include the Builder pattern and the Adapter pattern.
+
+The Builder pattern was used to create a Recipe object. I opted for this pattern because it allowed me to initially build a recipe object that only included certain attributes and without removing the immutable nature of the object and creating another constructor, I could then add more attributes to the object.
+
+The Adapter pattern was used to build the service layer of this API. I created a service interface which acted as an adaptee. I then created a service implementation class that acted as the adaptor, the class implemented the interface and inherited its methods to implement the business logic of the API. This pattern introduced loose coupling between the client and the service interface and increased the reusability of the code.
+
+
+### Testing
+This application was created using a test-driven development approach, following the red, green and refactor method. Test were created using Spring Boot, JUnit 5, Mockito, MockMVC, Java Persistence API(JPA), AssertJ Library and Jackson Testers.
+
+A Recipe controller test was created to test its communication with the client and the service layer. Unit tests were created for each REST endpoint: GET, POST, PUT and DELETE to verify the correct HTTP status code was found in the response and to verify the response payload contained the correct JSON body.
+
+A Recipe Service Implementation test was also created to test the implementation of the business logic, while the data access (repository) layer was mocked to test the service layer in isolation. The test verified the service layer's CRUD (Create, Read, Update and Delete) methods were functioning correctly.
+
+Error handling test were also created to validate if the wrong information was passed through the API such as an incorrect ID, then the API would return an Illegal State Exception.
+
+
+## Prerequisites
+This project uses the Java programming language and Node.js runtime environment.
+
+#### Java
+
+To run this application please make sure you have have Java 17 LTS (or higher) installed locally.
+
+You can use the following commands to check your Java version:
+```bash
+javac -version
+
+javac 17.0.4
+```
+```bash
+java -version
+
+openjdk version "17.0.4" 2022-07-19 LTS
+OpenJDK Runtime Environment Zulu17.36+13-CA (build 17.0.4+8-LTS)
+OpenJDK 64-Bit Server VM Zulu17.36+13-CA (build 17.0.4+8-LTS, mixed mode, sharing)
+```
+
+If you don't have Java installed, you can find the Oracle JDK Installation guide on the [oracle website](https://www.oracle.com/java/technologies/downloads/#jdk17).
+
+#### Node.js
+
+If you don't have Node installed, you will need to download nvm - the Node Version Manager first. You can find the installation instructions for the latest version on the [nvm Github repo](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+Once, you've downloaded nvm, you can install Node using the following commands:
+
+```
+nvm install node
+nvm use node
+```
+You should then see something like this in your terminal: `Now using node v16.6.0 (npm v7.19.1)` , the version may be slightly different.
+
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+1. Clone this repository
+```
+git clone git@gitlab.com:ay36/RecipeAPI.git
+```
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+2. Open the project directory using your desired IDE
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+3. Go to the `com.aishayusuff.RecipeAPI` package
+```
+cd src/main/java/com/aishayusuff/RecipeApi
+```
+
+4. Run `RecipeApiApplication.java` to run the backend server
+
+5. Then open a new terminal and `cd src/main/frontend`
+
+6. Download the required dependencies by running `npm install`
+
+7. Run the frontend server using `npm start`
+
+This should open the application in your browser and the application is now ready for you to use.
+## Images
+Here is a walkthrough of the website:
+(gif of the website)
+- view an ingredient
+- searching by ingredient
+- creating an ingredient
+- Deleting an ingredient
+
+## Open API Documentation
+An Open API doc for this REST API can be found here. It can be used to test the API's endpoints directly on the GitLab.com website.
+(Screenshot from https://editor.swagger.io/)
+
+## Database
+This application currently uses a PostgreSQL relational database.
+
+The database contains 3 tables: Recipes, Ingredients and Instructions. The Recipes and Ingredients tables contain a One to Many relationship. This means one record in the Recipes table is associated with more than one record in the Ingredients table. This relationship also exists with the Recipe and Instructions tables. The tables are joined by creating a Foreign Key column in the child table which holds a reference to the Primary Key found in the parent table (Recipes).
+
+Here is a diagram of the database schema:
+
+<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/DatabaseSchema.png" alt="project-database-schema" width="500"/>
 
 ## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+In the future I would like to implement the following features:
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- [ ] User can create an account and sign in
+- [ ] User can view only the recipes they have created
+- [ ] User can only delete recipes they have created
+- [ ] Build containers with Jib
+- [ ] Deploy the application using Heroku

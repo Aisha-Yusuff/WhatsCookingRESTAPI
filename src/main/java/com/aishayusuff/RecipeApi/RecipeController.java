@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/recipe")
+@CrossOrigin(origins = "http://localhost:3000")
 public class RecipeController {
 
     @Autowired
@@ -46,6 +47,11 @@ public class RecipeController {
     ResponseEntity<List<Recipe>> getByIngredientName(@PathVariable("ingredientName") String ingredientName) {
         return new ResponseEntity<>(recipeService.getByIngredientName(ingredientName),
                 HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{id}")
+    ResponseEntity<Recipe> getById(@PathVariable("id") Long recipeId){
+        return new ResponseEntity(recipeService.getById(recipeId), HttpStatus.OK);
     }
 
 }
