@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { ImBin } from "react-icons/im";
 import { Link } from "react-router-dom";
+import { NavBar } from "../components/NavBar";
 
 export const Recipe = () => {
   let params = useParams();
@@ -29,6 +30,7 @@ export const Recipe = () => {
 
   return (
     <div className="text-gray-700 body-font overflow-hidden bg-white">
+      <NavBar />
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-5/6 mx-auto flex flex-wrap">
           <img
@@ -37,7 +39,7 @@ export const Recipe = () => {
             src={details.imageURI}
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-5 lg:mt-0">
-            <h1 className="text-gray-900 text-4xl title-font font-semibold mb-3 capitalize">
+            <h1 className="text-gray-900 text-4xl title-font font-bold mb-3 capitalize">
               {details.name}
             </h1>
             <a href="http://localhost:3000/recipes">

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { RecipeCard } from "../components/RecipeCard";
 import { Search } from "../components/Search";
+import { NavBar } from "../components/NavBar";
 
 export const SearchResults = () => {
   const [recipeMatches, setRecipeMatches] = useState([]);
@@ -28,6 +29,7 @@ export const SearchResults = () => {
 
   return (
     <div>
+      <NavBar />
       <Search />
 
       <div className="w-fit mx-auto mt-10 mb-5 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14">
