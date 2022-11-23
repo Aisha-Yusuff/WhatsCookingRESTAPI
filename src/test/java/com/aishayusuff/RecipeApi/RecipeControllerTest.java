@@ -15,10 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
@@ -78,7 +75,7 @@ public class RecipeControllerTest {
     }
 
     @Test
-    void shouldReturnListOfAllRecipesWhenGetAllRecipesInvoked() throws Exception {
+    void shouldReturnListOfAllRecipes() throws Exception {
 //      Add recipe to Recipe list
         List<Recipe> recipeList = List.of(getDefaultRecipe());
         given(recipeService.getAllRecipes()).willReturn(recipeList);
@@ -92,6 +89,23 @@ public class RecipeControllerTest {
         then(response.getStatus()).isEqualTo(HttpStatus.OK.value());
         then(response.getContentAsString()).isEqualTo(json.write(recipeList).getJson());
         verify(recipeService).getAllRecipes();
+
+    }
+
+    @Test
+    void shouldRetrieveARecipeById() throws Exception {
+//        given
+//        Create placeholder id
+        Recipe existingRecipe = getDefaultRecipe();
+        existingRecipe.setId(1L);
+        given(recipeService.getById(1L)).willReturn(Optional.of(existingRecipe));
+//        when
+        MockHttpServletResponse response = mockMvc.perform(get("/recipe/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+//        then
+        then(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        then(response.getContentAsString()).isEqualTo(jsonRequest.write(existingRecipe).getJson());
 
     }
 

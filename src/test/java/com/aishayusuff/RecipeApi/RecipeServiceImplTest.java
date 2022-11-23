@@ -73,6 +73,20 @@ public class RecipeServiceImplTest {
     }
 
     @Test
+    public void shouldReturnARecipeById() {
+//        given
+        Recipe existingRecipe = getDefaultRecipe();
+        existingRecipe.setId(1L);
+        given(recipeRepository.findById(1L)).willReturn(Optional.of(existingRecipe));
+
+//        when
+       Optional<Recipe> actualRecipe = recipeService.getById(1L);
+//        then
+        verify(recipeRepository).findById(1L);
+        assertEquals(Optional.of(existingRecipe), actualRecipe);
+    }
+
+    @Test
     public void shouldAddNewRecipe() {
 //        given
 //        build a new recipe to add to recipe list
