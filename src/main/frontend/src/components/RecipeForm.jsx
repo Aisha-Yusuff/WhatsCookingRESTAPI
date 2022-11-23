@@ -81,142 +81,318 @@ export const RecipeForm = () => {
   };
 
   return (
-    <div>
-      <form className="">
-        <div className="">
-          {submitErrorMessage && <p className="e">{submitErrorMessage}</p>}
-          <label>Recipe Name: </label>
-          <div>
-            <input
-              className=""
-              type="text"
-              name="name"
-              value={recipe.name}
-              placeholder="recipe name"
-              onChange={handleInputChange}
-            />
-          </div>
-          <label>Ingredients:</label>
-          <div className="">
+    <div className="max-w-screen-md mx-auto p-5 rounded-lg border shadow-md">
+      <form className="w-full">
+        <div className="mx-3 p-3">
+          <div className="mb-8 mt-2">
+            {submitErrorMessage && (
+              <p className="e text-red-700 text-lg font-semibold mb-0.5">
+                {submitErrorMessage}
+              </p>
+            )}
+            <label className="block capitalize text-gray-700 text-lg font-bold mb-2 mr-2">
+              Recipe Name:
+            </label>
             <div>
               <input
-                className=""
-                type="text"
-                name="quantity"
-                placeholder="add quantity / weight"
-                value={recipe.ingredients.name}
-                onChange={handleIngredientInputChange}
-              />
-            </div>
-            <div>
-              <input
-                className=""
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mb-3 leading-tight"
                 type="text"
                 name="name"
-                placeholder="ingredient name"
-                value={recipe.ingredients.name}
-                onChange={handleIngredientInputChange}
+                value={recipe.name}
+                placeholder="Recipe Name"
+                onChange={handleInputChange}
               />
             </div>
-            <div>
+          </div>
+
+          <div className="flex flex-row">
+            <div className="pr-15 mr-5 w-full md:w-full px-1">
+              <label className="flex-row capitalize text-gray-700 text-lg font-bold">
+                Ingredient Name
+              </label>
               <input
-                className=""
-                type="text"
-                name="quantity"
-                placeholder="add quantity / weight"
-                value={recipe.ingredients.name}
-                onChange={handleIngredientInputChange}
-              />
-            </div>
-            <div>
-              <input
-                className=""
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
                 type="text"
                 name="name"
-                placeholder="ingredient name"
+                placeholder="Eg. Butter"
                 value={recipe.ingredients.name}
                 onChange={handleIngredientInputChange}
               />
             </div>
-            <div>
+            <div className=" pl-5 ml-5 w-full md:w-full px-1">
+              <label className="flex-row capitalize text-gray-700 text-lg font-bold mb-2 ">
+                Quantity
+              </label>
               <input
-                className=""
+                className="font-semibold rounded-lg block w-1/3 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
                 type="text"
                 name="quantity"
-                placeholder="add quantity / weight"
-                value={recipe.ingredients.name}
+                placeholder="Eg. 80g"
+                value={recipe.ingredients.quantity}
                 onChange={handleIngredientInputChange}
               />
             </div>
-            <div>
+          </div>
+          <div className="flex flex-row ">
+            <div className="pr-15 mr-5 w-full md:w-full px-1">
+              <label className="flex-row capitalize text-gray-700 text-lg font-bold">
+                Ingredient Name
+              </label>
               <input
-                className=""
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
                 type="text"
                 name="name"
-                placeholder="ingredient name"
+                placeholder="Eg. Butter"
                 value={recipe.ingredients.name}
                 onChange={handleIngredientInputChange}
               />
             </div>
+            <div className=" pl-5 ml-5 w-full md:w-full px-1">
+              <label className="flex-row capitalize text-gray-700 text-lg font-bold  ">
+                Quantity
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-1/3 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                type="text"
+                name="quantity"
+                placeholder="Eg. 80g"
+                value={recipe.ingredients.quantity}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
           </div>
-          <label>Instructions:</label>
-          <div>
-            <input
-              className=""
-              type="number"
-              name="step_number"
-              placeholder="1"
-              value={recipe.instructions.step_number}
-              onChange={handleIngredientInputChange}
-            />
+          <div className="flex flex-row ">
+            <div className="pr-15 mr-5 w-full md:w-full px-1">
+              <label className="flex-row capitalize text-gray-700 text-lg font-bold">
+                Ingredient Name
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                type="text"
+                name="name"
+                placeholder="Eg. Butter"
+                value={recipe.ingredients.name}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+            <div className=" pl-5 ml-5 w-full md:w-full px-1">
+              <label className="flex-row capitalize text-gray-700 text-lg font-bold  ">
+                Quantity
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-1/3 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                type="text"
+                name="quantity"
+                placeholder="Eg. 80g"
+                value={recipe.ingredients.quantity}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
           </div>
-          <div>
-            <input
-              className=""
-              type="text"
-              name="step_description"
-              placeholder="Add water your pot and boil on a medium heat..."
-              value={recipe.instructions.step_description}
-              onChange={handleIngredientInputChange}
-            />
+          <div className="flex flex-row mb-6 ">
+            <div className="pr-15 mr-5 w-full md:w-full px-1">
+              <label className="flex-row capitalize text-gray-700 text-lg font-bold">
+                Ingredient Name
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                type="text"
+                name="name"
+                placeholder="Eg. Butter"
+                value={recipe.ingredients.name}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+            <div className=" pl-5 ml-5 w-full md:w-full px-1">
+              <label className="flex-row capitalize text-gray-700 text-lg font-bold  ">
+                Quantity
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-1/3 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                type="text"
+                name="quantity"
+                placeholder="Eg. 80g"
+                value={recipe.ingredients.quantity}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
           </div>
-          <div>
-            <input
-              className=""
-              placeholder="2"
-              type="number"
-              name="step_number"
-              value={recipe.instructions.step_number}
-              onChange={handleIngredientInputChange}
-            />
+
+          <label className="block capitalize text-gray-700 text-lg font-bold mr-2">
+            Instructions:
+          </label>
+          <div className="flex flex-row">
+            <div className="pr-1 mr-1 w-1/2 md:w-1/4 px-1">
+              <label className="flex-row capitalize text-gray-700 text-md font-semibold">
+                Step No. :
+              </label>
+
+              <input
+                className="font-semibold rounded-lg block w-1/2 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-auto py-3 px-1 mb-3 mt-2 leading-tight"
+                type="number"
+                name="step_number"
+                placeholder="1"
+                value={recipe.instructions.step_number}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+
+            <div className="pl-1 ml-3 w-full md:w-full px-1">
+              <label className="flex-row text-gray-700 text-md font-semibold">
+                What do you need to do in this step?
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-md rounded py-3 px-5 mb-3 mt-2 leading-tight"
+                type="text"
+                name="step_description"
+                placeholder="Add water your pot and boil on a medium heat..."
+                value={recipe.instructions.step_description}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
           </div>
-          <div>
-            <input
-              className=""
-              type="text"
-              name="step_description"
-              placeholder="Add water your pot and boil on a medium heat..."
-              value={recipe.instructions.step_description}
-              onChange={handleIngredientInputChange}
-            />
+          <div className="flex flex-row">
+            <div className="pr-1 mr-1 w-1/2 md:w-1/4 px-1">
+              <label className="flex-row capitalize text-gray-700 text-md font-semibold">
+                Step No. :
+              </label>
+
+              <input
+                className="font-semibold rounded-lg block w-1/2 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-auto py-3 px-1 mb-3 mt-2 leading-tight"
+                type="number"
+                name="step_number"
+                placeholder="2"
+                value={recipe.instructions.step_number}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+
+            <div className="pl-1 ml-3 w-full md:w-full px-1">
+              <label className="flex-row text-gray-700 text-md font-semibold">
+                What do you need to do in this step?
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-md rounded py-3 px-5 mb-3 mt-2 leading-tight"
+                type="text"
+                name="step_description"
+                placeholder="Add water your pot and boil on a medium heat..."
+                value={recipe.instructions.step_description}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
           </div>
-          <label>Image:</label>
-          <div>
-            <input
-              className=""
-              type="text"
-              name="imageURI"
-              value={recipe.imageURI}
-              placeholder="Add the URL of your recipe's image here"
-              onChange={handleInputChange}
-            />
+          <div className="flex flex-row">
+            <div className="pr-1 mr-1 w-1/2 md:w-1/4 px-1">
+              <label className="flex-row capitalize text-gray-700 text-md font-semibold">
+                Step No. :
+              </label>
+
+              <input
+                className="font-semibold rounded-lg block w-1/2 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-auto py-3 px-1 mb-3 mt-2 leading-tight"
+                type="number"
+                name="step_number"
+                placeholder="3"
+                value={recipe.instructions.step_number}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+
+            <div className="pl-1 ml-3 w-full md:w-full px-1">
+              <label className="flex-row text-gray-700 text-md font-semibold">
+                What do you need to do in this step?
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-md rounded py-3 px-5 mb-3 mt-2 leading-tight"
+                type="text"
+                name="step_description"
+                placeholder="Add water your pot and boil on a medium heat..."
+                value={recipe.instructions.step_description}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row">
+            <div className="pr-1 mr-1 w-1/2 md:w-1/4 px-1">
+              <label className="flex-row capitalize text-gray-700 text-md font-semibold">
+                Step No. :
+              </label>
+
+              <input
+                className="font-semibold rounded-lg block w-1/2 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-auto py-3 px-1 mb-3 mt-2 leading-tight"
+                type="number"
+                name="step_number"
+                placeholder="4"
+                value={recipe.instructions.step_number}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+
+            <div className="pl-1 ml-3 w-full md:w-full px-1">
+              <label className="flex-row text-gray-700 text-md font-semibold">
+                What do you need to do in this step?
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-md rounded py-3 px-5 mb-3 mt-2 leading-tight"
+                type="text"
+                name="step_description"
+                placeholder="Add water your pot and boil on a medium heat..."
+                value={recipe.instructions.step_description}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row">
+            <div className="pr-1 mr-1 w-1/2 md:w-1/4 px-1">
+              <label className="flex-row capitalize text-gray-700 text-md font-semibold">
+                Step No. :
+              </label>
+
+              <input
+                className="font-semibold rounded-lg block w-1/2 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-auto py-3 px-1 mb-3 mt-2 leading-tight"
+                type="number"
+                name="step_number"
+                placeholder="5"
+                value={recipe.instructions.step_number}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+
+            <div className="pl-1 ml-3 w-full md:w-full px-1">
+              <label className="flex-row text-gray-700 text-md font-semibold">
+                What do you need to do in this step?
+              </label>
+              <input
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-md rounded py-3 px-5 mb-3 mt-2 leading-tight"
+                type="text"
+                name="step_description"
+                placeholder="Add water your pot and boil on a medium heat..."
+                value={recipe.instructions.step_description}
+                onChange={handleIngredientInputChange}
+              />
+            </div>
+          </div>
+
+          <div class="w-full md:w-full">
+            <label className="block capitalize text-gray-700 text-lg font-bold mb-2 mr-2">
+              Image:
+            </label>
+            <div>
+              <input
+                className="font-semibold rounded-lg block w-full bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-md rounded py-3 px-5 mb-3 leading-tight"
+                type="text"
+                name="imageURI"
+                value={recipe.imageURI}
+                placeholder="Add the URL of your image here"
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
         </div>
       </form>
       <button
         variant="primary"
         type="submit"
-        className="submit-button"
+        className=" mx-auto block w-1/4 bg-blue-500 text-white font-bold rounded-lg shadow hover:bg-green-600 focus:shadow-outline focus:outline-none font-bold py-2.5"
         onClick={handleSubmit}
       >
         Submit
