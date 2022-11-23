@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { ImBin } from "react-icons/im";
+import { Link } from "react-router-dom";
 
 export const Recipe = () => {
   let params = useParams();
@@ -36,9 +37,11 @@ export const Recipe = () => {
             <button className=" flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-1 focus:outline-none hover:bg-red-600 rounded-sm">
               Delete
             </button>
-            <button className="flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-3 focus:outline-none hover:bg-green-600 rounded-sm">
-              Update
-            </button>
+            <Link to={`/updateRecipe/${details.id}`}>
+              <button className="flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-3 focus:outline-none hover:bg-green-600 rounded-sm">
+                Update
+              </button>
+            </Link>
             <div className="mt-4 w-full">
               <div className="bg-gray-100 p-2 py-5 pr-5 pb-0 rounded-md">
                 <p className="text-xl font-semibold pl-2 pb-4">Ingredients</p>
