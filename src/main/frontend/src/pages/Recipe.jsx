@@ -33,10 +33,10 @@ export const Recipe = () => {
             <h1 className="text-gray-900 text-4xl title-font font-semibold mb-3 capitalize">
               {details.name}
             </h1>
-            <button className=" flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-0.5 ml-2 focus:outline-none hover:bg-red-600 rounded-sm">
+            <button className=" flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-1 focus:outline-none hover:bg-red-600 rounded-sm">
               Delete
             </button>
-            <button className="flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-2 focus:outline-none hover:bg-green-600 rounded-sm">
+            <button className="flex-row text-white font-semibold bg-gray-300 border-0 mt-1 py-0.5 px-1 ml-3 focus:outline-none hover:bg-green-600 rounded-sm">
               Update
             </button>
             <div className="mt-4 w-full">
