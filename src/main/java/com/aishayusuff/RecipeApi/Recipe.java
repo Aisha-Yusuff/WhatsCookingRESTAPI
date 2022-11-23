@@ -31,11 +31,10 @@ public class Recipe {
 //    Create foreign key (recipe_id) in instructions table
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
-    private List<Instruction> instructions;
-
+    private Set<Instruction> instructions;
     private String imageURI;
 
-    public Recipe(String name, Set<Ingredient> ingredients, List<Instruction> instructions) {
+    public Recipe(String name, Set<Ingredient> ingredients, Set<Instruction> instructions) {
         this(null, name, ingredients, instructions, null);
     }
 
