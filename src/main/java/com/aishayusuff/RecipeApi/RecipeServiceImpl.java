@@ -28,7 +28,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe addNewRecipe(Recipe recipe) {
 //        For each new ingredient save the recipe's id in the recipe_id column
-//        Cascade - saves recipe id for instructions aswell
+//        Cascade - saves recipe id for instructions also
         recipe.getIngredients().stream().forEach(ingredient -> ingredient.setRecipe_id(recipe.getId()));
         return recipeRepository.save(recipe);
     }
@@ -36,12 +36,11 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void updateRecipeById(Long recipeId, Recipe updatedRecipe) {
 //        Find the existing recipe
-//        Optional<Recipe> existingRecipe = recipeRepository.findById(recipeId);
-        if (recipeRepository.findById(recipeId).isPresent()) {
+        if (recipeRepository.findById(recipeId).isEmpty()) {
+            throw new IllegalStateException("This recipe cannot be found. Please check the recipe ID.");
+        } else {
             updatedRecipe.setId(recipeId);
             recipeRepository.save(updatedRecipe);
-        } else {
-            throw new IllegalStateException("This recipe cannot be found");
         }
     }
 
@@ -49,12 +48,11 @@ public class RecipeServiceImpl implements RecipeService {
     public void deleteRecipeById(Long recipeId) {
 //        Find the recipe to delete
         Optional<Recipe> existingRecipe = recipeRepository.findById(recipeId);
-        if (existingRecipe.isPresent()) {
-            recipeRepository.deleteById(recipeId);
+        if (existingRecipe.isEmpty()) {
+            throw new IllegalStateException("This recipe cannot be found. Please check the recipe ID.");
         } else {
-            throw new IllegalStateException("This recipe cannot be found");
+            recipeRepository.deleteById(recipeId);
         }
-
     }
 
     @Override
@@ -63,12 +61,9 @@ public class RecipeServiceImpl implements RecipeService {
         List<Ingredient> ingredientList = ingredientRepository.findByName(ingredientName);
         List<Recipe> recipesList = new ArrayList<>();
 
-
 //        extract the recipe id from all ingredient in the list
         for (Ingredient ingredient : ingredientList) {
             Long recipeId = ingredient.getRecipe_id();
-            System.out.println("Recipe ID = ");
-            System.out.println(recipeId);
             Optional<Recipe> matchingRecipe = recipeRepository.findById(recipeId);
             matchingRecipe.ifPresent(recipesList::add);
         }

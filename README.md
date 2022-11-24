@@ -1,7 +1,7 @@
 # What's Cooking?
 
 ## Description
-A Recipe REST API allowing users to discover a range of recipes and share their favourite recipes.
+What's Cooking is a test-driven recipe REST API with a Java Spring Boot backend and a React frontend. The API allows its users to discover a range of recipes that are stored in a PostgreSQL database, a  user can edit, update and delete an existing recipe and create their own recipe to share with other users. The API has a controller, service, repository layers along with 3 JPA entities for a recipe, ingredient and instruction object. The API also implements two software design patterns, the Builder and Adapter patterns.
 
 ## Features
 - User can view all recipes
@@ -43,7 +43,7 @@ When I no longer want to share it.
 ```
 ## Project Approach
 
-Although, this was a solo project I conducted stand ups where I reminded myself of what issues I had completed, what features I was working on at the time and address any blockers I may be experiencing. This project consisted of two sprints that each lasted a week. At the end of each sprint, I held a retrospective where I was able to evaluate my processes, analyse my backlog, check if I had reached the milestones I had created in my sprint planning session, identify what practises were successful and where improvements could be made.
+Although, this was a solo project I conducted stand-ups where I reminded myself of what issues I had completed, what features I was working on at the time and address any blockers I may be experiencing. This project consisted of two sprints that each lasted a week. At the end of each sprint, I held a retrospective where I was able to evaluate my processes, analyse my backlog, check if I had reached the milestones I had created in my sprint planning session, identify what practises were successful and where improvements could be made.
 
 ### Planning and Design
 To organise this project I created a GitLab Issues Board which consisted of 5 lists: Open, Task, Work in Progress, Blocked and Closed. The user stories were stored in the open list, the backlog was held  in the task list, the issues being worked on at the time were kept in the work in progress list and blockers in the blocked list. Once an issue had been completed it was moved into the closed list.
@@ -61,12 +61,22 @@ To visualise the structure of this application, I created a diagram to understan
 
 
 ### Implementation
+
+####  Design Patterns
 The design patterns used to build this REST API include the Builder pattern and the Adapter pattern.
 
 The Builder pattern was used to create a Recipe object. I opted for this pattern because it allowed me to initially build a recipe object that only included certain attributes and without removing the immutable nature of the object and creating another constructor, I could then add more attributes to the object.
 
 The Adapter pattern was used to build the service layer of this API. I created a service interface which acted as an adaptee. I then created a service implementation class that acted as the adaptor, the class implemented the interface and inherited its methods to implement the business logic of the API. This pattern introduced loose coupling between the client and the service interface and increased the reusability of the code.
 
+#### Database
+This application currently uses a PostgreSQL relational database.
+
+The database contains 3 tables: Recipes, Ingredients and Instructions. The Recipes and Ingredients tables contain a One-to-Many relationship. This means one record in the Recipes table is associated with more than one record in the Ingredients table. This relationship also exists with the Recipe and Instructions tables. The tables are joined by creating a Foreign Key column in the child table which holds a reference to the Primary Key found in the parent table (Recipes).
+
+Here is a diagram of the database schema:
+
+<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/DatabaseSchema.png" alt="project-database-schema" width="800"/>
 
 ### Testing
 This application was created using a test-driven development approach, following the red, green and refactor method. Test were created using Spring Boot, JUnit 5, Mockito, MockMVC, Java Persistence API(JPA), AssertJ Library and Jackson Testers.
@@ -83,7 +93,7 @@ This project uses the Java programming language and Node.js runtime environment.
 
 #### Java
 
-To run this application please make sure you have have Java 17 LTS (or higher) installed locally.
+To run this application please make sure you have Java 17 LTS (or higher) installed locally.
 
 You can use the following commands to check your Java version:
 ```bash
@@ -103,7 +113,7 @@ If you don't have Java installed, you can find the Oracle JDK Installation guide
 
 #### Node.js
 
-If you don't have Node installed, you will need to download nvm - the Node Version Manager first. You can find the installation instructions for the latest version on the [nvm Github repo](https://github.com/nvm-sh/nvm#installing-and-updating).
+If you don't have Node installed, you will need to download nvm - the Node Version Manager first. You can find the installation instructions for the latest version on the [nvm GitHub repo](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 Once, you've downloaded nvm, you can install Node using the following commands:
 
@@ -115,18 +125,17 @@ You should then see something like this in your terminal: `Now using node v16.6.
 
 
 ## Installation
+
 1. Clone this repository
 ```
 git clone git@gitlab.com:ay36/RecipeAPI.git
 ```
-
 2. Open the project directory using your desired IDE
 
 3. Go to the `com.aishayusuff.RecipeAPI` package
 ```
 cd src/main/java/com/aishayusuff/RecipeApi
 ```
-
 4. Run `RecipeApiApplication.java` to run the backend server
 
 5. Then open a new terminal and `cd src/main/frontend`
@@ -136,29 +145,11 @@ cd src/main/java/com/aishayusuff/RecipeApi
 7. Run the frontend server using `npm start`
 
 This should open the application in your browser and the application is now ready for you to use.
-## Images
-Here is a walkthrough of the website:
-(gif of the website)
-- view an ingredient
-- searching by ingredient
-- creating an ingredient
-- Deleting an ingredient
 
 ## Open API Documentation
-An Open API doc for this REST API can be found [here](openapi.yaml). It can be used to test the API's endpoints directly on the GitLab.com website.
+An Open API doc for this REST API can be found [here](openapi.yaml). It can be used to test the APIs endpoints directly on the GitLab.com website.
 
 <img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/Openapi.png"  alt="OpenApi-swagger-ui" width="800"/>
-
-
-## Database
-This application currently uses a PostgreSQL relational database.
-
-The database contains 3 tables: Recipes, Ingredients and Instructions. The Recipes and Ingredients tables contain a One to Many relationship. This means one record in the Recipes table is associated with more than one record in the Ingredients table. This relationship also exists with the Recipe and Instructions tables. The tables are joined by creating a Foreign Key column in the child table which holds a reference to the Primary Key found in the parent table (Recipes).
-
-Here is a diagram of the database schema:
-
-<img src="https://recipeapi-images.s3.eu-west-2.amazonaws.com/DatabaseSchema.png" alt="project-database-schema" width="800"/>
-
 
 ## Roadmap
 In the future I would like to implement the following features:

@@ -51,6 +51,7 @@ public class RecipeControllerTest {
 //        build recipe
         Recipe porridgeRecipe = Recipe.builder()
                 .name("Quick and Easy Porridge")
+                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/porridgeandfruit.jpg")
                 .build();
 
 //        create ingredients for the recipe
@@ -115,7 +116,7 @@ public class RecipeControllerTest {
 //        build a new recipe to add to recipe list
         Recipe vegSoup = Recipe.builder()
                 .name("Veggie Soup for One")
-                .imageURI("s3://recipeapi-images/vegSoup.jpg")
+                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/vegSoup.jpg")
                 .build();
 //        create ingredients for the recipe
         Ingredient water = new Ingredient("Water", "500ml", vegSoup.getId());
@@ -158,6 +159,7 @@ public class RecipeControllerTest {
 //        build "updated" recipe
         Recipe veganPorridgeRecipe = Recipe.builder()
                 .name("Quick and Easy Vegan Porridge")
+                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/porridgeandfruit.jpg")
                 .build();
 
 //        create ingredients for the recipe
