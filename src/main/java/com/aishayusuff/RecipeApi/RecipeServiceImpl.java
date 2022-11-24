@@ -34,13 +34,14 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void updateRecipeById(Long recipeId, Recipe updatedRecipe) {
+    public Recipe updateRecipeById(Long recipeId, Recipe updatedRecipe) {
 //        Find the existing recipe
         if (recipeRepository.findById(recipeId).isEmpty()) {
             throw new IllegalStateException("This recipe cannot be found. Please check the recipe ID.");
         } else {
             updatedRecipe.setId(recipeId);
-            recipeRepository.save(updatedRecipe);
+            return recipeRepository.save(updatedRecipe);
+
         }
     }
 

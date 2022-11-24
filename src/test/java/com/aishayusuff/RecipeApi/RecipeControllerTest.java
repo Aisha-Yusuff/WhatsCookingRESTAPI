@@ -20,8 +20,7 @@ import java.util.*;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -154,7 +153,8 @@ public class RecipeControllerTest {
     public void shouldUpdateAnExistingRecipe() throws Exception {
 //        given
 //       Create placeholder ID for default recipe
-       getDefaultRecipe().setId(1L);
+        Recipe existingRecipe = getDefaultRecipe();
+        existingRecipe.setId(1L);
 
 //        build "updated" recipe
         Recipe veganPorridgeRecipe = Recipe.builder()
@@ -162,26 +162,8 @@ public class RecipeControllerTest {
                 .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/porridgeandfruit.jpg")
                 .build();
 
-//        create ingredients for the recipe
-        Ingredient veganPorridgeOats = new Ingredient("Porridge Oats", "50g", veganPorridgeRecipe.getId());
-        Ingredient oatMilk = new Ingredient("Oat Milk", "350ml", veganPorridgeRecipe.getId());
-//        create set to hold all ingredients in the recipe
-        Set<Ingredient> porridgeIngredientsSet = new HashSet<>(Arrays.asList(veganPorridgeOats, oatMilk));
-//      Add ingredients to recipe
-        veganPorridgeRecipe.setIngredients(porridgeIngredientsSet);
-
-//      create instructions for the recipe
-        Instruction veganPorridgeStep1 = new Instruction(1, "Add your porridge oats to your saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep2 = new Instruction(2, "Pour the Oat Milk into the saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep3 = new Instruction( 3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy", veganPorridgeRecipe.getId());
-//      create list to hold all instructions in recipe
-        Set<Instruction> porridgeInstructionSet = new HashSet<>(Arrays.asList(veganPorridgeStep1, veganPorridgeStep2, veganPorridgeStep3));
-//      Add instructions to recipe
-        veganPorridgeRecipe.setInstructions(porridgeInstructionSet);
-
 //      expect updateRecipeById will not return a value
-        doNothing().when(recipeService).updateRecipeById(getDefaultRecipe().getId(), veganPorridgeRecipe);
-
+        when(recipeService.updateRecipeById(existingRecipe.getId(), veganPorridgeRecipe)).thenReturn(veganPorridgeRecipe);
 //        when - put request
         ResultActions response = mockMvc.perform(put("/recipe/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)

@@ -131,34 +131,17 @@ public class RecipeServiceImplTest {
         recipeService.addNewRecipe(existingRecipe);
 
 //        build "updated" recipe
-        Recipe veganPorridgeRecipe = Recipe.builder()
+        Recipe updatedRecipe = Recipe.builder()
                 .name("Quick and Easy Vegan Porridge")
                 .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/porridgeandfruit.jpg")
                 .build();
 
-//        create ingredients for the recipe
-        Ingredient veganPorridgeOats = new Ingredient("Porridge Oats", "50g", veganPorridgeRecipe.getId());
-        Ingredient oatMilk = new Ingredient("Oat Milk", "350ml", veganPorridgeRecipe.getId());
-//        create set to hold all ingredients in the recipe
-        Set<Ingredient> porridgeIngredientsSet = new HashSet<>(Arrays.asList(veganPorridgeOats, oatMilk));
-//      Add ingredients to recipe
-        veganPorridgeRecipe.setIngredients(porridgeIngredientsSet);
-
-//      create instructions for the recipe
-        Instruction veganPorridgeStep1 = new Instruction(1, "Add your porridge oats to your saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep2 = new Instruction(2, "Pour the Oat Milk into the saucepan.", veganPorridgeRecipe.getId());
-        Instruction veganPorridgeStep3 = new Instruction( 3, "Cook on medium to low heat for 4-5 minutes and then serve and enjoy", veganPorridgeRecipe.getId());
-//      create list to hold all instructions in recipe
-        Set<Instruction> porridgeInstructionSet = new HashSet<>(Arrays.asList(veganPorridgeStep1, veganPorridgeStep2, veganPorridgeStep3));
-//      Add instructions to recipe
-        veganPorridgeRecipe.setInstructions(porridgeInstructionSet);
-
         given(recipeRepository.findById(any(Long.class))).willReturn(Optional.of(existingRecipe));
 
 //        when
-        recipeService.updateRecipeById(existingRecipe.getId(), veganPorridgeRecipe);
+        recipeService.updateRecipeById(existingRecipe.getId(), updatedRecipe);
 //        then
-        verify(recipeRepository).save(veganPorridgeRecipe);
+        verify(recipeRepository).save(updatedRecipe);
     }
 
         @Test

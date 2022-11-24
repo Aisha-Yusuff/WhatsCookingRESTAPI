@@ -3,6 +3,7 @@ package com.aishayusuff.RecipeApi;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +20,7 @@ public class Recipe {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String name;
 
 //    One to many mapping with ingredient entity
