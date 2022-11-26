@@ -75,7 +75,8 @@ export const RecipeForm = () => {
           console.log(res.data);
         });
     } else {
-      errorMessage = "Please fill out all the fields!";
+      errorMessage =
+        "Please make sure your recipe contains a name, ingredients and instructions!";
       setSubmitErrorMessage(errorMessage);
     }
   };

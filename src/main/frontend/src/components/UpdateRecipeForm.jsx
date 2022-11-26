@@ -48,20 +48,51 @@ export const UpdateRecipeForm = ({ recipeId }) => {
     }));
   };
 
+  const handleInstructionInputChange = (event) => {
+    setSubmitErrorMessage("");
+    const { name, value } = event.target;
+    let newArray = recipe.ingredients;
+
+    newArray[0] = { ...newArray[0], [name]: value };
+
+    setRecipe((prevState) => ({
+      ...prevState,
+      instructions: newArray,
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     let errorMessage = "";
 
-    axios
-      .put("http://localhost:8080/recipe/" + recipeId, {
-        name: recipe.name,
-        ingredients: recipe.ingredients,
-        instructions: recipe.instructions,
-        imageURI: recipe.imageURI,
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
+    // expects nested object array for ingredients
+    const values = [
+      recipe.title,
+      [recipe.ingredients.name, recipe.ingredients.quantity],
+      [recipe.instructions.step_number, recipe.instructions.step_description],
+      recipe.imageURI,
+    ];
+    const allFieldsFilled = values.every((field) => {
+      const value = `${field}`.trim();
+      return value !== "" && value !== "0";
+    });
+
+    if (allFieldsFilled) {
+      axios
+        .put(`http://localhost:8080/recipe/${recipeId}`, {
+          name: recipe.name,
+          ingredients: recipe.ingredients,
+          instructions: recipe.instructions,
+          imageURI: recipe.imageURI,
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    } else {
+      const errorMessage =
+        "Please make sure your recipe contains a name, ingredients and instructions!";
+      setSubmitErrorMessage(errorMessage);
+    }
   };
 
   return (
@@ -85,7 +116,6 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 value={recipe.name}
                 placeholder="Recipe Name"
                 onChange={handleInputChange}
-                required
               />
             </div>
           </div>
@@ -102,7 +132,6 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 placeholder="Eg. Butter"
                 value={recipe.ingredients.name}
                 onChange={handleIngredientInputChange}
-                required
               />
             </div>
             <div className=" pl-5 ml-5 w-full md:w-full px-1">
@@ -219,8 +248,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_number"
                 placeholder="1"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
-                required
+                onChange={handleInstructionInputChange}
               />
             </div>
 
@@ -234,7 +262,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
           </div>
@@ -250,7 +278,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_number"
                 placeholder="2"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
 
@@ -264,7 +292,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
           </div>
@@ -280,7 +308,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_number"
                 placeholder="3"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
 
@@ -294,7 +322,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
           </div>
@@ -310,7 +338,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_number"
                 placeholder="4"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
 
@@ -324,7 +352,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
           </div>
@@ -340,7 +368,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_number"
                 placeholder="5"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
 
@@ -354,7 +382,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionInputChange}
               />
             </div>
           </div>
