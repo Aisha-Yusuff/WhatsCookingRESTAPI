@@ -88,17 +88,17 @@ A Recipe Service Implementation test was also created to test the implementation
 The test also used the Behaviour Driven Development process of given-when-then where the given stage was the preparation stage of the test where objects were created and manipulated for the test. The when stage is where the behaviour of the test was introduced and the then stage is the verification part of the test. The expected and actual results are compared and validate if they are equal and different methods are checked to see if they were invoked correctly.
 
 ### Reflection
-By creating this API, I was able to learn how to implement architectural and creational Software Design Patterns and the benefits they can bring to your code. I gained a better understanding on functional programming and was able to successfully use the Stream API and Lambda Functions. This project was my first experience working with the One-to-Many mapping and although I had to overcome a few hurdles for it work successfully, I now have a strong understanding of it. I've also been able to develop my knowledge on Behaviour Driven Development, data structures and the Java syntax. The use of a GitLab Issues board was very helpful as it allowed me to track my progress, stay organised and complete features and issues within my planned Milestones. 
+By creating this API, I was able to learn how to implement architectural and creational Software Design Patterns and the benefits they can bring to your code. I gained a better understanding on functional programming and was able to successfully use the Stream API and Lambda Functions. This project was my first experience working with the One-to-Many mapping, and although I had to overcome a few hurdles for it work successfully, I now have a strong understanding of it. I've also been able to develop my knowledge on Behaviour Driven Development, data structures and the Java syntax. The use of a GitLab Issues board was very helpful as it allowed me to track my progress, stay organised and complete features and issues within my planned Milestones.
 
-As I mentioned before I did experience a few hurdles when working on the One-to-Many relationship of my database tables. By using the incorrect fetch type annotation, I was rendering duplicates of my instructions when I fetched a recipe object in my React app. I learnt that by using the FetchType.EAGER on my One-to-Many relationships, I had created a [Cartesian Product](https://quebit.com/askquebit/quebit-products/exploring-the-sql-cartesian-join/#:~:text=In%20SQL%20Server%2C%20the%20cartesian,defined%20between%20the%20two%20tables) which was creating duplicates because the fetch type was creating a relationship between my two child tables. With the help of online resources such as Stack Overflow and my helpful technical mentor I was able to rectify this issue by using the FetchType.LAZY annotation.  
+As I mentioned before I did experience a few hurdles when working on the One-to-Many relationship of my database tables. By using the incorrect fetch type annotation, I was rendering duplicates of my instructions when I fetched a recipe object in my React app. I learnt that by using the FetchType.EAGER on my One-to-Many relationships, I had created a [Cartesian Product](https://quebit.com/askquebit/quebit-products/exploring-the-sql-cartesian-join/#:~:text=In%20SQL%20Server%2C%20the%20cartesian,defined%20between%20the%20two%20tables) which was creating duplicates because the fetch type was creating a relationship between my two child tables. With the help of online resources such as Stack Overflow and my helpful technical mentor I was able to rectify this issue by using the FetchType.LAZY annotation.
 
-Furthermore, to prepare my REST API for containerisation and deployment. I decided to create a cloud database for my local PostgreSQL database using the Amazon Relational Database Service, but I wasn't able to use the getByIngredient and DeleteById methods using that database and decided to use a local database instead. So, my next steps will include learning how to use the Amazon Relational Database Service successfully.   
+Furthermore, to prepare my REST API for containerisation and deployment. I decided to create a cloud database for my local PostgreSQL database using the Amazon Relational Database Service, but I wasn't able to use the getByIngredient and DeleteById methods using that database and decided to use a local database instead. So, my next steps will include learning how to use the Amazon Relational Database Service successfully.
 
-If I could improve this project, I would use git branching more. So, for every feature I would create a new branch and if I needed multiple versions of feature, I would also create a new branch. So that If I needed to refer to the branches again I would have them readily available. This API was test driven and I used BDD and the red-green-refactor approach. As this was my first time creating a spring boot REST API, my tests were initially quite lengthy as I wanted to make sure that all the functionality was working correctly once my tests had passed. I made sure to refactor my test but now completing this project I can see the benefits of refactoring my test further and understand what information is useful and not in the given stage of my tests. 
+If I could improve this project, I would use git branching more. So, for every feature I would create a new branch and if I needed multiple versions of feature, I would also create a new branch. So that If I needed to refer to the branches again I would have them readily available. This API was test driven and I used BDD and the red-green-refactor approach. As this was my first time creating a spring boot REST API, my tests were initially quite lengthy as I wanted to make sure that all the functionality was working correctly once my tests had passed. I made sure to refactor my test but now completing this project I can see the benefits of refactoring my test further and understand what information is useful and not in the given stage of my tests.
 
 
 ## Prerequisites
-This project uses the Java programming language and Node.js runtime environment.
+This project uses the Java programming language, Node.js runtime environment and a local PostgreSQL database.
 
 #### Java
 
@@ -132,6 +132,43 @@ nvm use node
 ```
 You should then see something like this in your terminal: `Now using node v16.6.0 (npm v7.19.1)` , the version may be slightly different.
 
+#### PostgreSQL
+To run this application you need to download Postgres and create a database called recipe.
+
+If you are using a macOS, you can download Postgresql using the following commands and [Homebrew](https://brew.sh/).
+
+If you are not using a macOS refer to the [postgreSQL website](https://www.postgresql.org/download/) and the follow from step 3.
+
+1. Install Postgresql
+```
+brew install postgresql
+```
+2. Run this after the installation to start the Postgresql software in the background.
+```
+$ brew services start postgresql
+```
+- You should get the following output:
+```
+==> Successfully started `postgresql` (label: homebrew.mxcl.postgresql)
+```
+3. Build your database using [psql](https://www.postgresql.org/docs/current/app-psql.html). To enter psql, run this command in your terminal:
+```
+psql -h 127.0.0.1 
+```
+- You should see the following output:
+```
+$ psql -h 127.0.0.1
+
+psql (14.2)
+Type "help" for help.
+
+<yourusername>=# 
+```
+4. Enter the following CREATE DATABASE query in your terminal and your database will now be created:
+```
+CREATE DATABASE recipe;
+```
+
 
 ## Installation
 
@@ -163,10 +200,9 @@ An Open API doc for this REST API can be found [here](openapi.yaml). It can be u
 ## Roadmap
 In the future I would like to implement the following features:
 
-- [ ] Use the AWS api to allow users to upload images to their recipe
+- [ ] Use the AWS API to allow users to upload images to their recipe
 - [ ] Build containers with Jib
 - [ ] Deploy the application using Heroku
 - [ ] User can create an account and sign in
 - [ ] User can view only the recipes they have created
 - [ ] User can only delete recipes they have created
-
