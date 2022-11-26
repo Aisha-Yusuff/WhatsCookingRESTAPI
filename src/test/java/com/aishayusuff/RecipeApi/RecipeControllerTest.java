@@ -113,39 +113,26 @@ public class RecipeControllerTest {
     public void shouldCreateNewRecipe() throws Exception {
 //        given
 //        build a new recipe to add to recipe list
-        Recipe vegSoup = Recipe.builder()
+        Recipe newRecipe = Recipe.builder()
                 .name("Veggie Soup for One")
-                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/vegSoup.jpg")
+                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/newRecipe.jpg")
                 .build();
-//        create ingredients for the recipe
-        Ingredient water = new Ingredient("Water", "500ml", vegSoup.getId());
-        Ingredient carrot = new Ingredient("Carrot", "150g", vegSoup.getId());
-        Ingredient potato = new Ingredient("Potato", "1", vegSoup.getId());
-        Ingredient stockCubes = new Ingredient("Stock Cubes", "2", vegSoup.getId());
-//        create set to hold all ingredients in the recipe
-        Set<Ingredient> soupIngredientSet = new HashSet<>(Arrays.asList(water, carrot, potato, stockCubes));
-//        add ingredients to recipe
-        vegSoup.setIngredients(soupIngredientSet);
+        Ingredient exampleIngredient = new Ingredient("Stock Cubes", "2", newRecipe.getId());
+        Instruction exampleInstruction = new Instruction (1, "In a pot, boil water and add the stock cubes", newRecipe.getId());
+        newRecipe.setIngredients(Set.of(exampleIngredient));
+        newRecipe.setInstructions(Set.of(exampleInstruction));
 
-//        create instructions for the recipe
-         Instruction vegSoupStep1 = new Instruction (1, "Boil the water, stock cubes in to your pot.", vegSoup.getId());
-         Instruction vegSoupStep2 = new Instruction (2, "Chop your veggies and place them in your pot.", vegSoup.getId());
-         Instruction vegSoupStep3 = new Instruction (3, "Leave your soup to cook for 25 minutes and then serve.", vegSoup.getId());
-//        create list to hold all instructions
-        Set<Instruction> instructionSet = new HashSet<>(Arrays.asList(vegSoupStep1, vegSoupStep2, vegSoupStep3));
-//        add instructions to the recipe
-        vegSoup.setInstructions(instructionSet);
-        given(recipeService.addNewRecipe(any(Recipe.class))).willReturn(vegSoup);
+        given(recipeService.addNewRecipe(any(Recipe.class))).willReturn(newRecipe);
 
 //        when - post request to add new recipe
         MockHttpServletResponse response = mockMvc.perform(post("/recipe")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonRequest.write(vegSoup)
+                .content(jsonRequest.write(newRecipe)
                         .getJson())).andReturn().getResponse();
 
 //        then
         then(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-        then(response.getContentAsString()).isEqualTo(jsonRequest.write(vegSoup).getJson());
+        then(response.getContentAsString()).isEqualTo(jsonRequest.write(newRecipe).getJson());
         verify(recipeService).addNewRecipe(any(Recipe.class));
     }
 
@@ -157,17 +144,21 @@ public class RecipeControllerTest {
         existingRecipe.setId(1L);
 
 //        build "updated" recipe
-        Recipe veganPorridgeRecipe = Recipe.builder()
+        Recipe updatedRecipe = Recipe.builder()
                 .name("Quick and Easy Vegan Porridge")
                 .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/porridgeandfruit.jpg")
                 .build();
+        Ingredient exampleIngredient = new Ingredient("Porridge Oats","100g", updatedRecipe.getId());
+        Instruction exampleInstruction = new Instruction(1, "Cook the porridge for 10 mins", updatedRecipe.getId());
+        updatedRecipe.setIngredients(Set.of(exampleIngredient));
+        updatedRecipe.setInstructions(Set.of(exampleInstruction));
 
 //      expect updateRecipeById will not return a value
-        when(recipeService.updateRecipeById(existingRecipe.getId(), veganPorridgeRecipe)).thenReturn(veganPorridgeRecipe);
+        when(recipeService.updateRecipeById(existingRecipe.getId(), updatedRecipe)).thenReturn(updatedRecipe);
 //        when - put request
         ResultActions response = mockMvc.perform(put("/recipe/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(veganPorridgeRecipe)));
+                .content(objectMapper.writeValueAsString(updatedRecipe)));
 //        then
         response.andExpect(status().isNoContent());
     }

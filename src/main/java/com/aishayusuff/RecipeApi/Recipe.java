@@ -24,12 +24,14 @@ public class Recipe {
     @Size(min = 5)
     private String name;
 
+    @NotNull
 //    One to many mapping with ingredient entity
 //    Create foreign key (recipe_id) in ingredients table
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Set<Ingredient> ingredients;
 
+    @NotNull
 //    One to many mapping with instruction entity
 //    Create foreign key (recipe_id) in instructions table
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

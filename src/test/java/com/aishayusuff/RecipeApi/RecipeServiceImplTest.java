@@ -91,35 +91,20 @@ public class RecipeServiceImplTest {
     public void shouldAddNewRecipe() {
 //        given
 //        build a new recipe to add to recipe list
-        Recipe vegSoup = Recipe.builder()
+        Recipe newRecipe = Recipe.builder()
                 .name("Veggie Soup for One")
-                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/vegSoup.jpg")
+                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/newRecipe.jpg")
                 .build();
-//        create ingredients for the recipe
-        Ingredient water = new Ingredient("Water", "500ml", vegSoup.getId());
-        Ingredient carrot = new Ingredient("Carrot", "150g", vegSoup.getId());
-        Ingredient potato = new Ingredient("Potato", "1", vegSoup.getId());
-        Ingredient stockCubes = new Ingredient("Stock Cubes", "2", vegSoup.getId());
-        Ingredient blackPepper = new Ingredient("Black Pepper", "1tbsp", vegSoup.getId());
-//        create set to hold all ingredients in the recipe
-        Set<Ingredient> soupIngredientSet = new HashSet<>(Arrays.asList(water, carrot, potato, stockCubes, blackPepper));
-//        add ingredients to recipe
-        vegSoup.setIngredients(soupIngredientSet);
+        Ingredient exampleIngredient = new Ingredient("Stock Cubes", "2", newRecipe.getId());
+        Instruction exampleInstruction = new Instruction (1, "In a pot, boil water and add the stock cubes", newRecipe.getId());
+        newRecipe.setIngredients(Set.of(exampleIngredient));
+        newRecipe.setInstructions(Set.of(exampleInstruction));
 
-//        create ingredients for the recipe
-        Instruction vegSoupStep1 = new Instruction (1, "Boil the water, stock cubes and black pepper in a medium-sized pot.", vegSoup.getId());
-        Instruction vegSoupStep2 = new Instruction (2, "Chop your veggies and place them in your pot.", vegSoup.getId());
-        Instruction vegSoupStep3 = new Instruction (3, "Leave your soup to cook for 25 minutes on a medium heat and then serve.", vegSoup.getId());
-//        create list to hold all instructions
-        Set<Instruction> instructionSet = new HashSet<>(Arrays.asList(vegSoupStep1, vegSoupStep2, vegSoupStep3));
-//        add instructions to the recipe
-        vegSoup.setInstructions(instructionSet);
-
-        given(recipeRepository.save(vegSoup)).willReturn(vegSoup);
+        given(recipeRepository.save(newRecipe)).willReturn(newRecipe);
 //        when
-        recipeService.addNewRecipe(vegSoup);
+        recipeService.addNewRecipe(newRecipe);
 //        then
-        verify(recipeRepository).save(vegSoup);
+        verify(recipeRepository).save(newRecipe);
     }
 
     @Test
@@ -135,7 +120,10 @@ public class RecipeServiceImplTest {
                 .name("Quick and Easy Vegan Porridge")
                 .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/porridgeandfruit.jpg")
                 .build();
-
+        Ingredient exampleIngredient = new Ingredient("Porridge Oats","100g", updatedRecipe.getId());
+        Instruction exampleInstruction = new Instruction(1, "Cook the porridge for 10 mins", updatedRecipe.getId());
+        updatedRecipe.setIngredients(Set.of(exampleIngredient));
+        updatedRecipe.setInstructions(Set.of(exampleInstruction));
         given(recipeRepository.findById(any(Long.class))).willReturn(Optional.of(existingRecipe));
 
 //        when
