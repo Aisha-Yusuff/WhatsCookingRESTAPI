@@ -85,6 +85,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 value={recipe.name}
                 placeholder="Recipe Name"
                 onChange={handleInputChange}
+                required
               />
             </div>
           </div>
@@ -101,6 +102,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 placeholder="Eg. Butter"
                 value={recipe.ingredients.name}
                 onChange={handleIngredientInputChange}
+                required
               />
             </div>
             <div className=" pl-5 ml-5 w-full md:w-full px-1">
@@ -218,6 +220,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 placeholder="1"
                 value={recipe.instructions.step_number}
                 onChange={handleIngredientInputChange}
+                required
               />
             </div>
 
