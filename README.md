@@ -43,7 +43,7 @@ When I no longer want to share it.
 ```
 ## Project Approach
 
-Although, this was a solo project I conducted stand-ups where I reminded myself of what issues I had completed, what features I was working on at the time and address any blockers I may be experiencing. This project consisted of two sprints that each lasted a week. At the end of each sprint, I held a retrospective where I was able to evaluate my processes, analyse my backlog, check if I had reached the milestones I had created in my sprint planning session, identify what practises were successful and where improvements could be made.
+This project consisted of two sprints that each lasted just over a week. At the end of each sprint, I held a retrospective where I was able to evaluate my processes, analyse my backlog, check if I had reached the milestones I had created in my sprint planning session, identify what practises were successful and where improvements could be made. Although, this was a solo project I conducted regular stand-ups to remind myself of what issues I had completed, what features I was working on at the time, update my issue board and address any blockers I may be experiencing.
 
 ### Planning and Design
 To organise this project I created a GitLab Issues Board which consisted of 5 lists: Open, Task, Work in Progress, Blocked and Closed. The user stories were stored in the open list, the backlog was held  in the task list, the issues being worked on at the time were kept in the work in progress list and blockers in the blocked list. Once an issue had been completed it was moved into the closed list.
@@ -63,11 +63,11 @@ To visualise the structure of this application, I created a diagram to understan
 ### Implementation
 
 ####  Design Patterns
-The design patterns used to build this REST API include the Builder pattern and the Adapter pattern.
+The design patterns used to build this REST API was the Builder pattern (creational) and the Service Layer pattern (architechural).
 
 The Builder pattern was used to create a Recipe object. I opted for this pattern because it allowed me to initially build a recipe object that only included certain attributes and without removing the immutable nature of the object and creating another constructor, I could then add more attributes to the object.
 
-The Adapter pattern was used to build the service layer of this API. I created a service interface which acted as an adaptee. I then created a service implementation class that acted as the adaptor, the class implemented the interface and inherited its methods to implement the business logic of the API. This pattern introduced loose coupling between the client and the service interface and increased the reusability of the code.
+The Service Layer pattern was used to build the service layer of this API. I created a service interface which held the CRUD methods of the API. I then created a service implementation class that implemented the interface and inherited its methods. This classed added functionality to each method and communicated with the Jpa repository layer, to ensure the correct data was retrieved from the postgreSQL database. This pattern introduces loose coupling and abstraction to the API and increases the reusability and scalabilty of the code.
 
 #### Database
 This application currently uses a PostgreSQL relational database.
@@ -85,7 +85,7 @@ A Recipe controller test was created to test its communication with the client a
 
 A Recipe Service Implementation test was also created to test the implementation of the business logic, while the data access (repository) layer was mocked to test the service layer in isolation. The test verified the service layer's CRUD (Create, Read, Update and Delete) methods were functioning correctly.
 
-Error handling test were also created to validate if the wrong information was passed through the API such as an incorrect ID, then the API would return an Illegal State Exception.
+The test also used the Behaviour Driven Development process of given-when-then where the given stage was the preparation stage of the test where objects were created and manipulated for the test. The when stage is where the behaviour of the test was introduced and the then stage is the verification part of the test. The expected and actual results are compared and validate if they are equal and different methods are checked to see if they were invoked correctly.
 
 
 ## Prerequisites
