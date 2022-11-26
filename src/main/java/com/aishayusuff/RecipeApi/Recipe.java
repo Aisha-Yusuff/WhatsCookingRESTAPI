@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -20,18 +21,18 @@ public class Recipe {
     @GeneratedValue
     private Long id;
 
-    @NotNull
+    @Size(min = 5)
     private String name;
 
 //    One to many mapping with ingredient entity
 //    Create foreign key (recipe_id) in ingredients table
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Set<Ingredient> ingredients;
 
 //    One to many mapping with instruction entity
 //    Create foreign key (recipe_id) in instructions table
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Set<Instruction> instructions;
     private String imageURI;

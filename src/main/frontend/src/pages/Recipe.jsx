@@ -59,7 +59,7 @@ export const Recipe = () => {
               </button>
             </Link>
             <div className="mt-4 w-full">
-              <div className="bg-gray-100 p-2 py-5 pr-5 pb-0 rounded-md">
+              <div className="bg-orange-50 p-2 py-5 pr-5 pb-0 rounded-md">
                 <p className="text-xl font-semibold pl-2 pb-4">Ingredients</p>
                 {details.ingredients?.map((ingredient, index) => {
                   return (
@@ -86,7 +86,7 @@ export const Recipe = () => {
                             {instruction.step_number}.{" "}
                             {instruction.step_description}
                           </li>
-                          <hr className="my-4 mx-auto h-0.5 bg-gray-200 rounded border-0 md:my-4"></hr>
+                          <hr className="my-4 mx-auto h-1 bg-white rounded border-0 md:my-4"></hr>
                         </ul>
                       </div>
                     );

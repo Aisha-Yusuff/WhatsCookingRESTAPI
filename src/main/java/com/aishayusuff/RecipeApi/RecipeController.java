@@ -44,9 +44,13 @@ public class RecipeController {
     }
 
     @GetMapping(path = "/ingredient/{ingredientName}")
-    ResponseEntity<List<Recipe>> getByIngredientName(@PathVariable("ingredientName") String ingredientName) {
-        return new ResponseEntity<>(recipeService.getByIngredientName(ingredientName),
-                HttpStatus.OK);
+    ResponseEntity<Object> getByIngredientName(@PathVariable("ingredientName") String ingredientName) {
+        List resultsList = recipeService.getByIngredientName(ingredientName);
+        if (resultsList.isEmpty()) {
+            return ResponseEntity.badRequest().body("This ingredient cant be found in any of our recipes.");
+        } else {
+            return new ResponseEntity<>(resultsList, HttpStatus.OK);
+        }
     }
 
     @GetMapping(path = "/{id}")
