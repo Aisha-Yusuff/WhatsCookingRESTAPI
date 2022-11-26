@@ -21,7 +21,8 @@ public class Recipe {
     @GeneratedValue
     private Long id;
 
-    @Size(min = 5)
+    @NotNull
+    @Size(min = 3)
     private String name;
 
     @NotNull

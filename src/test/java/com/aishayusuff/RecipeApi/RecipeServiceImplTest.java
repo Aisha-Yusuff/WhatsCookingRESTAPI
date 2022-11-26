@@ -8,9 +8,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -151,17 +151,35 @@ public class RecipeServiceImplTest {
     @Test
     public void ShouldRetrieveRecipesByIngredientName() {
 //        given
-//        create "expected" list of ingredient - porridge oats for getDefaultRecipe
-        Stream<Ingredient> porridgeOatsStream = getDefaultRecipe().getIngredients().stream()
-                .filter(ingredient -> ingredient.getName().equals("Porridge Oats"));
-        List<Ingredient> porridgeOats = porridgeOatsStream.collect(Collectors.toList());
+        Recipe existingRecipe = getDefaultRecipe();
+//        create "expected" list of ingredients when looking for porridge oats and it can be found getDefaultRecipe
+        List<Ingredient> filteredList = getDefaultRecipe().getIngredients().stream()
+                .filter(ingredient -> ingredient.getName().equals("Porridge Oats")).collect(Collectors.toList());
 
-        given(ingredientRepository.findByName(any(String.class))).willReturn(porridgeOats);
-        given(recipeRepository.findById(porridgeOats.get(0).getRecipe_id())).willReturn(Optional.of(getDefaultRecipe()));
-
-        recipeService.getByIngredientName("Porridge Oats");
-        assertEquals(porridgeOats, ingredientRepository.findByName(("Porridge Oats")));
-
+        given(ingredientRepository.findByName(any(String.class))).willReturn(filteredList);
+        given(recipeRepository.findById(filteredList.get(0).getRecipe_id())).willReturn(Optional.of(existingRecipe));
+//        when
+        List<Recipe> matches = recipeService.getByIngredientName("Porridge Oats");
+//        then
+        verify(ingredientRepository).findByName("Porridge Oats");
+        assertEquals(List.of(existingRecipe), matches);
     }
+
+    @Test
+    public void ShouldReturnEmptyListWhenIngredientCantBeFound() {
+//        given
+        Recipe existingRecipe = getDefaultRecipe();
+//        create "expected" list of ingredients when looking for Chocolate and it can't be found
+        List<Ingredient> filteredList = getDefaultRecipe().getIngredients().stream()
+                .filter(ingredient -> ingredient.getName().equals("Chocolate")).collect(Collectors.toList());
+
+        given(ingredientRepository.findByName(any(String.class))).willReturn(filteredList);
+//        when
+        List<Recipe> matches = recipeService.getByIngredientName("Chocolate");
+//        then
+        verify(ingredientRepository).findByName("Chocolate");
+        assertTrue(matches.isEmpty());
+    }
+
 
 }

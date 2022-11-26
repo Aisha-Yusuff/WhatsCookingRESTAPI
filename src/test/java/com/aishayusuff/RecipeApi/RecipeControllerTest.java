@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
@@ -137,6 +138,51 @@ public class RecipeControllerTest {
     }
 
     @Test
+    public void shouldReturnBadRequestWhenRecipeHasNoName() throws Exception {
+//        given
+        Recipe newRecipe = Recipe.builder()
+                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/newRecipe.jpg")
+                .build();
+        Ingredient exampleIngredient = new Ingredient("Stock Cubes", "2", newRecipe.getId());
+        Instruction exampleInstruction = new Instruction (1, "In a pot, boil water and add the stock cubes", newRecipe.getId());
+        newRecipe.setIngredients(Set.of(exampleIngredient));
+        newRecipe.setInstructions(Set.of(exampleInstruction));
+
+//        when - post request to add new recipe
+        MockHttpServletResponse response = mockMvc.perform(post("/recipe")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonRequest.write(newRecipe)
+                        .getJson())).andReturn().getResponse();
+
+//        then
+        then(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenRecipeHasNoInstructions() throws Exception {
+//        given
+        Recipe newRecipe = Recipe.builder()
+                .name("Veggie Soup for One")
+                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/newRecipe.jpg")
+                .build();
+        Ingredient exampleIngredient = new Ingredient("Stock Cubes", "2", newRecipe.getId());
+        newRecipe.setIngredients(Set.of(exampleIngredient));
+
+//        when - post request to add new recipe
+        MockHttpServletResponse response = mockMvc.perform(post("/recipe")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonRequest.write(newRecipe)
+                        .getJson())).andReturn().getResponse();
+
+//        then
+        then(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+
+    }
+
+
+
+    @Test
     public void shouldUpdateAnExistingRecipe() throws Exception {
 //        given
 //       Create placeholder ID for default recipe
@@ -163,6 +209,30 @@ public class RecipeControllerTest {
         response.andExpect(status().isNoContent());
     }
 
+    @Test
+    public void shouldReturnBadRequestWhenUpdatedRecipeHasNoIngredients() throws Exception {
+//        given
+//       Create placeholder ID for default recipe
+        Recipe existingRecipe = getDefaultRecipe();
+        existingRecipe.setId(1L);
+
+//        build "updated" recipe
+        Recipe updatedRecipe = Recipe.builder()
+                .name("Quick and Easy Vegan Porridge")
+                .imageURI("https://recipeapi-images.s3.eu-west-2.amazonaws.com/porridgeandfruit.jpg")
+                .build();
+        Instruction exampleInstruction = new Instruction(1, "Cook the porridge for 10 mins", updatedRecipe.getId());
+        updatedRecipe.setInstructions(Set.of(exampleInstruction));
+
+//      expect updateRecipeById will not return a value
+        when(recipeService.updateRecipeById(existingRecipe.getId(), updatedRecipe)).thenReturn(updatedRecipe);
+//        when - put request
+        ResultActions response = mockMvc.perform(put("/recipe/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updatedRecipe)));
+//        then
+        response.andExpect(status().isBadRequest());
+    }
     @Test
     public void shouldDeleteARecipe() throws Exception {
 //        given
@@ -193,6 +263,28 @@ public class RecipeControllerTest {
         then(response.getContentAsString()).isEqualTo(json.write(recipeList).getJson());
         verify(recipeService).getByIngredientName(any(String.class));
     }
+
+    @Test
+    public void shouldThrowExceptionWhenIngredientCantBeFound () throws Exception {
+//        given
+        List<Recipe> recipeList = List.of(getDefaultRecipe());
+//      Filter recipe list and find recipe with Chocolate as an ingredients
+        List<Recipe> filteredList = recipeList.stream()
+                .filter(recipe -> recipe.getIngredients().stream()
+                        .anyMatch(ingredient -> ingredient.getName().equals("Chocolate")))
+                .collect(Collectors.toList());
+
+        given(recipeService.getByIngredientName("Chocolate")).willReturn(filteredList);
+//        when
+        MockHttpServletResponse response = mockMvc.perform(get("/recipe/ingredient/{ingredientName}", "Chocolate")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+//        then
+        then(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        then(response.getContentAsString()).isEqualTo("This ingredient cant be found in any of our recipes.");
+
+    }
+
 
 
 }

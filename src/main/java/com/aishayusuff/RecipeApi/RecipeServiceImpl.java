@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +42,6 @@ public class RecipeServiceImpl implements RecipeService {
         } else {
             updatedRecipe.setId(recipeId);
             return recipeRepository.save(updatedRecipe);
-
         }
     }
 
@@ -60,15 +60,12 @@ public class RecipeServiceImpl implements RecipeService {
     public List<Recipe> getByIngredientName(String ingredientName) {
 //     find all occurrences of the ingredient in the ingredient table
         List<Ingredient> ingredientList = ingredientRepository.findByName(ingredientName);
-        List<Recipe> recipesList = new ArrayList<>();
 
-//        extract the recipe id from all ingredient in the list
-        for (Ingredient ingredient : ingredientList) {
-            Long recipeId = ingredient.getRecipe_id();
-            Optional<Recipe> matchingRecipe = recipeRepository.findById(recipeId);
-            matchingRecipe.ifPresent(recipesList::add);
-        }
-        return recipesList;
+        List<Recipe> recipeMatches = ingredientList.stream().map(ingredient -> {
+            return recipeRepository.findById(ingredient.getRecipe_id()).get();
+        }).collect(Collectors.toList());
+
+        return recipeMatches;
 
     }
 }

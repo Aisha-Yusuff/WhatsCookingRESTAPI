@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class RecipeController {
     }
 
     @PostMapping
-    ResponseEntity<Recipe> addNewRecipe(@RequestBody Recipe recipe) {
+    ResponseEntity<Recipe> addNewRecipe(@Valid @RequestBody Recipe recipe) {
         return new ResponseEntity<>(
                 recipeService.addNewRecipe(recipe),
                 HttpStatus.CREATED
@@ -32,7 +33,7 @@ public class RecipeController {
 
     @PutMapping(path = "/{id}")
     ResponseEntity<Recipe> updateRecipe(@PathVariable("id") Long recipeId,
-                                        @RequestBody Recipe updatedRecipe) {
+                                        @RequestBody  @Valid Recipe updatedRecipe) {
         recipeService.updateRecipeById(recipeId, updatedRecipe);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
 

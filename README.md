@@ -154,8 +154,10 @@ An Open API doc for this REST API can be found [here](openapi.yaml). It can be u
 ## Roadmap
 In the future I would like to implement the following features:
 
+- [ ] Use the AWS api to allow users to upload images to their recipe
+- [ ] Build containers with Jib
+- [ ] Deploy the application using Heroku
 - [ ] User can create an account and sign in
 - [ ] User can view only the recipes they have created
 - [ ] User can only delete recipes they have created
-- [ ] Build containers with Jib
-- [ ] Deploy the application using Heroku
+
