@@ -77,6 +77,7 @@ public class RecipeControllerTest {
 
     @Test
     void shouldReturnListOfAllRecipes() throws Exception {
+//       given
 //      Add recipe to Recipe list
         List<Recipe> recipeList = List.of(getDefaultRecipe());
         given(recipeService.getAllRecipes()).willReturn(recipeList);

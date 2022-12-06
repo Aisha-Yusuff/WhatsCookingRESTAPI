@@ -38,6 +38,7 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Set<Instruction> instructions;
+
     private String imageURI;
 
     public Recipe(String name, Set<Ingredient> ingredients, Set<Instruction> instructions) {

@@ -387,7 +387,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
             </div>
           </div>
 
-          <div class="w-full md:w-full">
+          <div className="w-full md:w-full">
             <label className="block capitalize text-gray-700 text-lg font-bold mb-2 mr-2">
               Image:
             </label>

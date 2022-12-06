@@ -47,6 +47,19 @@ export const RecipeForm = () => {
     }));
   };
 
+  const handleInstructionsInputChange = (event) => {
+    setSubmitErrorMessage("");
+    const { name, value } = event.target;
+    let newArray = recipe.instructions;
+
+    newArray[0] = { ...newArray[0], [name]: value };
+
+    setRecipe((prevState) => ({
+      ...prevState,
+      instructions: newArray,
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     let errorMessage = "";
@@ -234,7 +247,7 @@ export const RecipeForm = () => {
                 name="step_number"
                 placeholder="1"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
 
@@ -248,7 +261,7 @@ export const RecipeForm = () => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
           </div>
@@ -264,7 +277,7 @@ export const RecipeForm = () => {
                 name="step_number"
                 placeholder="2"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
 
@@ -278,7 +291,7 @@ export const RecipeForm = () => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
           </div>
@@ -294,7 +307,7 @@ export const RecipeForm = () => {
                 name="step_number"
                 placeholder="3"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
 
@@ -308,7 +321,7 @@ export const RecipeForm = () => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
           </div>
@@ -324,7 +337,7 @@ export const RecipeForm = () => {
                 name="step_number"
                 placeholder="4"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
 
@@ -338,7 +351,7 @@ export const RecipeForm = () => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
           </div>
@@ -354,7 +367,7 @@ export const RecipeForm = () => {
                 name="step_number"
                 placeholder="5"
                 value={recipe.instructions.step_number}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
 
@@ -368,12 +381,12 @@ export const RecipeForm = () => {
                 name="step_description"
                 placeholder="Add water your pot and boil on a medium heat..."
                 value={recipe.instructions.step_description}
-                onChange={handleIngredientInputChange}
+                onChange={handleInstructionsInputChange}
               />
             </div>
           </div>
 
-          <div class="w-full md:w-full">
+          <div className="w-full md:w-full">
             <label className="block capitalize text-gray-700 text-lg font-bold mb-2 mr-2">
               Image:
             </label>

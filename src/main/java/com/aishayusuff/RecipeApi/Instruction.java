@@ -21,8 +21,11 @@ public class Instruction {
     @Id
     @GeneratedValue
     private Long id;
+
     private int step_number;
+
     private String step_description;
+
     private Long recipe_id;
 
     public Instruction(int step_number, String step_description, Long recipe_id) {

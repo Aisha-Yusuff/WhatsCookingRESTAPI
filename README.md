@@ -1,7 +1,7 @@
 # What's Cooking?
 
 ## Description
-What's Cooking is a test-driven recipe REST API with a Java Spring Boot backend and a React frontend. The API allows its users to discover a range of recipes that are stored in a PostgreSQL database, a  user can edit, update and delete an existing recipe and create their own recipe to share with other users. The API has a controller, service, repository layers along with 3 JPA entities for a recipe, ingredient and instruction object. The API also implements two software design patterns, the Builder and Adapter patterns.
+What's Cooking is a test-driven recipe REST API with a Java Spring Boot backend and a React frontend. The API allows its users to discover a range of recipes that are stored in a PostgreSQL database, a  user can edit, update and delete an existing recipe and create their own recipe to share with other users. The API has a controller, service, repository layers along with 3 JPA entities for a recipe, ingredient and instruction object. The API also implements the Builder and Service Layer software design patterns.
 
 ## Features
 - User can view all recipes

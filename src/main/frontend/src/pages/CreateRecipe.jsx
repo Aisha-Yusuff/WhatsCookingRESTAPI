@@ -6,7 +6,7 @@ export const CreateRecipe = () => {
     <div>
       <NavBar />
       <div className="container px-5 py-24 mx-auto">
-        <div class="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
           <h1 className="text-gray-900 text-5xl title-font font-bold mb-5 capitalize">
             Create You're Own Recipe
           </h1>

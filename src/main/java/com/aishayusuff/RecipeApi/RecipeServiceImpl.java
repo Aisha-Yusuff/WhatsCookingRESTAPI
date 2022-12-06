@@ -16,12 +16,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getAllRecipes() {
+
         return recipeRepository.findAll();
     }
 
 
     @Override
     public Optional<Recipe> getById(Long recipeId) {
+
         return recipeRepository.findById(recipeId);
     }
 

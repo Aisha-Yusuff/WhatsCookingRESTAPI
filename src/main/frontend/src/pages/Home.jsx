@@ -23,7 +23,7 @@ export const Home = () => {
     <div>
       <NavBar />
       <div className="container px-5 mt-16 mx-auto">
-        <div class="flex flex-col justify-center items-center mb-1">
+        <div className="flex flex-col justify-center items-center mb-1">
           <h1 className="text-gray-900 text-6xl title-font font-bold mb-8">
             Welcome to What's Cooking?
           </h1>
