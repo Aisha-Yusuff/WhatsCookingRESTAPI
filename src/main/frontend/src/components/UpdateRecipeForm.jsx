@@ -139,7 +139,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 Quantity
               </label>
               <input
-                className="font-semibold rounded-lg block w-1/3 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                className="font-semibold rounded-lg block w-2/5 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
                 type="text"
                 name="quantity"
                 placeholder="Eg. 80g"
@@ -167,7 +167,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 Quantity
               </label>
               <input
-                className="font-semibold rounded-lg block w-1/3 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                className="font-semibold rounded-lg block w-2/5 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
                 type="text"
                 name="quantity"
                 placeholder="Eg. 80g"
@@ -195,7 +195,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 Quantity
               </label>
               <input
-                className="font-semibold rounded-lg block w-1/3 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                className="font-semibold rounded-lg block w-2/5 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
                 type="text"
                 name="quantity"
                 placeholder="Eg. 80g"
@@ -223,7 +223,7 @@ export const UpdateRecipeForm = ({ recipeId }) => {
                 Quantity
               </label>
               <input
-                className="font-semibold rounded-lg block w-1/3 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
+                className="font-semibold rounded-lg block w-2/5 bg-gray-100 leading-tight focus:outline-gray-200 focus:shadow-outline text-lg rounded py-3 px-5 mt-2 mb-3 leading-tight"
                 type="text"
                 name="quantity"
                 placeholder="Eg. 80g"
